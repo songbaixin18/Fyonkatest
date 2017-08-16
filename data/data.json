@@ -1,0 +1,22 @@
+{
+  "unionId": 1,
+  "periodism": 28,
+  "duration": 6,
+  "lastDay": "2017-08-12",
+  "recordBeans": [
+    {
+      "recordId": 1,
+      "unionId": 1,
+      "startDay": "2017-04-15",
+      "endDay": "2017-04-20"
+    },
+    {
+      "recordId": 2,
+      "unionId": 1,
+      "startDay": "2017-05-12",
+      "endDay": "2017-05-17"
+    }
+  ],
+  "dysmenorrhea": 3,
+  "flow": 3
+}
