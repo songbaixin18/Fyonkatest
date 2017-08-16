@@ -1,0 +1,448 @@
+@charset "utf-8";
+//主容器
+.period_container {
+  max-width: 750px;
+  min-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 128/100rem;
+  //顶部通栏
+  header {
+    width: 100%;
+    height: 128/100rem;
+    padding-top: 63/100rem;
+    //line-height: 128/100rem;
+    color: #ffffff;
+
+    font-size: 38/100rem;
+    background-color: @periodColor;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+
+    text-align: center;
+  }
+  //日历部分
+  .calendar {
+    width: 100%;
+    background-color: #EEEEEE;
+    margin: 0 auto;
+
+    .yearsAndMonths {
+      width: 100%;
+      height: 50/100rem;
+      line-height: 50/100rem;
+      color: @periodColor;
+      text-align: center;
+      background-color: #fff;
+      padding: 0 30/100rem;
+      a {
+        color: @periodColor;
+        i {
+          font-size: 38/100rem;
+        }
+      }
+    }
+    //周
+    .weeks {
+      width: 100%;
+      height: 38/100rem;
+      font-size: 24/100rem;
+      background-color: #fff;
+      margin: 0 auto;
+
+      li {
+        width: 102/100rem;
+        height: 38/100rem;
+        line-height: 38/100rem;
+        float: right;
+        text-align: left;
+        &:first-child, &:last-child {
+          color: #FF98AB;
+        }
+      }
+    }
+    //日期
+    .days {
+      width: 100%;
+      padding-left: 4/100rem;
+      padding-right: 2/100rem;
+      padding-bottom: 4/100rem;
+      font-size: 24/100rem;
+      margin: 0 auto;
+      li {
+        width: 102/100rem;
+        height: 102/100rem;
+        background-color: #ffffff;
+        border-radius: 4/100rem;
+        float: right;
+        margin-right: 4/100rem;
+        margin-top: 4/100rem;
+        padding: 12/100rem;
+        color: #9A9A9A;
+
+        &.physiology {
+          //background-color:#FF98B1;
+          background-color: @physiology;
+          color: #ffffff;
+        }
+
+        &.PredictivePhysiological {
+          background-color: @PredictivePhysiological;
+          color: @physiology;
+        }
+        &.SafePeriod {
+          color: @SafePeriod;
+        }
+        &.EasyPregnancy {
+          color: @EasyPregnancy;
+        }
+        &.ovulation {
+          color: @ovulation;
+        }
+      }
+
+    }
+  }
+  //对应颜色
+  .prompt {
+    width: 100%;
+    height: 110/100rem;
+    padding-right: 40/100rem;
+    margin-top: 2/100rem;
+    margin-bottom: 10/100rem;
+
+    li {
+      float: right;
+      margin-left: 48/100rem;
+      margin-top: 18/100rem;
+
+      span {
+        width: 22/100rem;
+        height: 22/100rem;
+        display: inline-block;
+        margin-left: 8/100rem;
+      }
+      &:nth-child(1) span {
+        background-color: @physiology;
+      }
+      &:nth-child(2) span {
+        background-color: @PredictivePhysiological;
+      }
+      &:nth-child(3) span {
+        background-color: @SafePeriod;
+      }
+      &:nth-child(4) span {
+        background-color: @EasyPregnancy;
+      }
+      &:nth-child(5) span {
+        background-color: @ovulation;
+      }
+    }
+  }
+  //操作列表
+  .operation {
+    ul {
+      li {
+        height: 106/100rem;
+        line-height: 106/100rem;
+        border-bottom: 1/100rem solid #E1E1E1;
+        padding-right: 24/100rem;
+        i {
+          font-size: 42/100rem;
+          color: #FF8697;
+        }
+        span {
+          font-size: 38/100rem;
+        }
+        &:first-child {
+          padding-left: 25/100rem;
+          a {
+            width: 120/100rem;
+            height: 50/100rem;
+            display: block;
+            float: left;
+            margin-top: 35/100rem;
+            border-radius: 24/100rem;
+            background-color: #CCC4C2;
+            position: relative;
+            span {
+              width: 44/100rem;
+              height: 44/100rem;
+              display: block;
+              background-color: #fff;
+              border-radius: 50%;
+              position: absolute;
+
+              top: 3/100rem;
+            }
+            .off {
+              right: 4/100rem;
+            }
+            .on {
+              right: 70/100rem;
+            }
+
+          }
+
+        }
+        &:last-child {
+          border-bottom: none;
+          span {
+            color: #FF8697;
+          }
+        }
+      }
+    }
+
+  }
+  //遮挡层1,2,3
+  .cover {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    display: none;
+    font-size: 36/100rem;
+
+    .modelBox {
+      width: 710/100rem;
+      height: 520/100rem;
+      background-color: #fff;
+      margin: 273/100rem auto;
+      padding: 30/100rem;
+      color: #444444;
+
+      .dates{
+        height: 200/100rem;
+        overflow: auto;
+        overflow-y: scroll;
+        font-size: 24/100rem;
+        color: #666666;
+
+        margin-top: 36/100rem;
+        padding-bottom: 10/100rem;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      h6 {
+        height: 56/100rem;
+        span {
+          float: left;
+          i {
+            color: @periodColor;
+            font-size: 40/100rem;
+          }
+        }
+      }
+      >span {
+        height: 50/100rem;
+        font-size: 30/100rem;
+        color: #9A9A9A;
+        display: block;
+      }
+      ul,ul.modelBox_ul2,ul.modelBox_ul3{
+        li.modelBox_li1 {
+          height: 89/100rem;
+          line-height: 89/100rem;
+          i {
+            font-size: 42/100rem;
+            color: #FF8697;
+          }
+          &:nth-child(1), &:nth-child(2) {
+            a {
+              width: 120/100rem;
+              height: 50/100rem;
+              display: block;
+              float: left;
+              //padding: 3/100rem 4/100rem;
+              margin-top: 20/100rem;
+              border-radius: 24/100rem;
+              background-color: #CCC4C2;
+              position: relative;
+              span {
+                width: 44/100rem;
+                height: 44/100rem;
+                display: block;
+                background-color: #fff;
+                border-radius: 50%;
+                position: absolute;
+                top: 3/100rem;
+              }
+              .off {
+                right: 4/100rem;
+              }
+              .on {
+                right: 70/100rem;
+              }
+            }
+          }
+        }
+        li.modelBox_li2 {
+          width: 92/100rem;
+          height: 75/100rem;
+          text-align: center;
+          line-height: 75/100rem;
+          float: right;
+          border: 1/100rem solid #EBEBEB;
+          &.active {
+            background-color: @periodColor;
+          }
+
+        }
+
+      }
+      ul.modelBox_ul2 {
+        border-left: 1/100rem solid #EBEBEB;
+        border-right: 1/100rem solid #EBEBEB;
+      }
+      button {
+        width: 150/100rem;
+        height: 66/100rem;
+        color: #ffffff;
+        border: none;
+        border-radius: 8/100rem;
+        margin-right: 120/100rem;
+        margin-top: 65/100rem;
+
+        &.yes{
+          background-color: #38D2EC;
+        }
+      }
+    }
+  }
+//名词解释
+  .explain {
+    display: none;
+    width: 100%;
+    position: fixed;
+    top: 128/100rem;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 1000;
+    overflow: auto;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .close_box {
+      height: 128/100rem;
+      position: fixed;
+      //position: absolute;
+      //top: -65/100rem;
+      top: 63/100rem;
+      //top: 0;
+      font-size: 44/100rem;
+      right: 20/100rem;
+      color: #ffffff;
+      z-index: 100000;
+    }
+    .line {
+      margin-top: 37/100rem;
+      padding-top: 56/100rem;
+      height: 126/100rem;
+      ul.line_ul {
+          width: 620/100rem;
+        margin: 0 auto;
+        position: relative;
+        li {
+          height: 9/100rem;
+          width: 155/100rem;
+          position: relative;
+          float: left;
+          &.ovulation {
+            width: 28/100rem;
+            height: 28/100rem;
+            border-radius: 50%;
+            border: 1px solid #CCC4C2;
+            background-color: #000000;
+            z-index: 2;
+            position: absolute;
+            left: 201/100rem;
+            top: -11/100rem;
+            span {
+              bottom: 0;
+              display:block;
+              top :-56/100rem;
+              right: -70/100rem;
+            }
+          }
+          &.SafePeriod{
+            background-color: @SafePeriod;
+          }
+          &.EasyPregnancy{
+            background-color: @EasyPregnancy;
+          }
+          &.physiology {
+
+          }
+          >span {
+            //width: 10px;
+            //height: 10px;
+            //display: block;
+            position: absolute;
+            font-size: 28/100rem;
+            color: #8F8F8F;
+            bottom: -60/100rem;
+            right: 0;
+            white-space:nowrap;
+            &:first-child {
+              text-align: left;
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+    .description {
+      .description_ul {
+        li {
+          margin: 36/100rem 30/100rem;
+          div {
+            height: 50/100rem;
+            span {
+              float: right;
+              color: #323232;
+            }
+            .circular {
+              width: 31/100rem;
+              height: 31/100rem;
+              display: block;
+              border-radius: 50%;
+              margin-left: 28/100rem;
+              &.physiology {
+                background-color: @physiology;
+            }
+              &.SafePeriod{
+                background-color: @SafePeriod;
+              }
+              &.EasyPregnancy{
+                background-color: @EasyPregnancy;
+              }
+             &.PredictivePhysiological {
+               background-color: @PredictivePhysiological;
+             }
+              &.ovulation{
+              background-color: @ovulation;
+            }
+              &.gestationPeriod {
+                border: 1/100rem solid #FF5178;
+              }
+            }
+          }
+
+          p {
+            color: #8F8F8F;
+          }
+          &:last-child {
+            margin-bottom: 240/100rem;
+          }
+        }
+      }
+    }
+  }
+}

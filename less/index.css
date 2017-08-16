@@ -1,0 +1,547 @@
+@charset "utf-8";
+/*适配方案*/
+@media (min-width: 320px) {
+  html {
+    font-size: 42.66666667px;
+  }
+}
+@media (min-width: 360px) {
+  html {
+    font-size: 48px;
+  }
+}
+@media (min-width: 375px) {
+  html {
+    font-size: 50px;
+  }
+}
+@media (min-width: 384px) {
+  html {
+    font-size: 51.2px;
+  }
+}
+@media (min-width: 400px) {
+  html {
+    font-size: 53.33333333px;
+  }
+}
+@media (min-width: 412px) {
+  html {
+    font-size: 54.93333333px;
+  }
+}
+@media (min-width: 414px) {
+  html {
+    font-size: 55.2px;
+  }
+}
+@media (min-width: 424px) {
+  html {
+    font-size: 56.53333333px;
+  }
+}
+@media (min-width: 480px) {
+  html {
+    font-size: 64px;
+  }
+}
+@media (min-width: 540px) {
+  html {
+    font-size: 72px;
+  }
+}
+@media (min-width: 600px) {
+  html {
+    font-size: 80px;
+  }
+}
+@media (min-width: 640px) {
+  html {
+    font-size: 85.33333333px;
+  }
+}
+@media (min-width: 720px) {
+  html {
+    font-size: 96px;
+  }
+}
+@media (min-width: 750px) {
+  html {
+    font-size: 100px;
+  }
+}
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  font-size: 14px;
+  font-family: 'Microsoft YaHei', sans-serif;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+ul,
+ol {
+  list-style: none;
+}
+input[type="text"],
+input[type="search"],
+textarea {
+  border: none;
+  outline: none;
+  resize: none;
+  -webkit-appearance: none;
+}
+.today{
+  float: left;
+  padding: 0 0.3rem;
+}
+.f_left {
+  float: left;
+}
+.f_right {
+  float: right;
+}
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: block;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+  clear: both;
+}
+.period_container {
+  max-width: 750px;
+  min-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 1.28rem;
+}
+.period_container header {
+  width: 100%;
+  height: 1.28rem;
+  padding-top: 0.63rem;
+  color: #ffffff;
+  font-size: 0.38rem;
+  background-color: #FF4F73;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  text-align: center;
+}
+.period_container .calendar {
+  width: 100%;
+  background-color: #EEEEEE;
+  margin: 0 auto;
+}
+.period_container .calendar .yearsAndMonths {
+  width: 100%;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  color: #FF4F73;
+  text-align: center;
+  background-color: #fff;
+  padding: 0 0.3rem 0 0;
+}
+.period_container .calendar .yearsAndMonths a {
+  color: #FF4F73;
+}
+.period_container .calendar .yearsAndMonths a i {
+  font-size: 0.38rem;
+}
+.period_container .calendar .weeks {
+  width: 100%;
+  height: 0.38rem;
+  font-size: 0.24rem;
+  background-color: #fff;
+  margin: 0 auto;
+}
+.period_container .calendar .weeks li {
+  width: 1.02rem;
+  height: 0.38rem;
+  line-height: 0.38rem;
+  float: right;
+  text-align: left;
+}
+.period_container .calendar .weeks li:first-child,
+.period_container .calendar .weeks li:last-child {
+  color: #FF98AB;
+}
+.period_container .calendar .days {
+  width: 100%;
+  padding-left: 0.04rem;
+  padding-right: 0.02rem;
+  padding-bottom: 0.04rem;
+  font-size: 0.24rem;
+  margin: 0 auto;
+}
+.period_container .calendar .days li {
+  width: 1.02rem;
+  height: 1.02rem;
+  background-color: #ffffff;
+  border-radius: 0.04rem;
+  float: right;
+  margin-right: 0.04rem;
+  margin-top: 0.04rem;
+  padding: 0.12rem;
+  color: #9A9A9A;
+}
+.period_container .calendar .days li.physiology {
+  background-color: #FF98B1;
+  color: #ffffff;
+}
+.period_container .calendar .days li.PredictivePhysiological {
+  background-color: #FFE2E4;
+  color: #FF98B1;
+}
+.period_container .calendar .days li.SafePeriod {
+  color: #B5D95E;
+}
+.period_container .calendar .days li.EasyPregnancy {
+  color: #D5A5CF;
+}
+.period_container .calendar .days li.ovulation {
+  color: #FCB239;
+}
+.period_container .prompt {
+  width: 100%;
+  height: 1.1rem;
+  padding-right: 0.4rem;
+  margin-top: 0.02rem;
+  margin-bottom: 0.1rem;
+}
+.period_container .prompt li {
+  float: right;
+  margin-left: 0.48rem;
+  margin-top: 0.18rem;
+}
+.period_container .prompt li span {
+  width: 0.22rem;
+  height: 0.22rem;
+  display: inline-block;
+  margin-left: 0.08rem;
+}
+.period_container .prompt li:nth-child(1) span {
+  background-color: #FF98B1;
+}
+.period_container .prompt li:nth-child(2) span {
+  background-color: #FFE2E4;
+}
+.period_container .prompt li:nth-child(3) span {
+  background-color: #B5D95E;
+}
+.period_container .prompt li:nth-child(4) span {
+  background-color: #D5A5CF;
+}
+.period_container .prompt li:nth-child(5) span {
+  background-color: #FCB239;
+}
+.period_container .operation ul li {
+  height: 1.06rem;
+  line-height: 1.06rem;
+  border-bottom: 0.01rem solid #E1E1E1;
+  padding-right: 0.24rem;
+}
+.period_container .operation ul li i {
+  font-size: 0.42rem;
+  color: #FF8697;
+}
+.period_container .operation ul li span {
+  font-size: 0.38rem;
+}
+.period_container .operation ul li:first-child {
+  padding-left: 0.25rem;
+}
+.period_container .operation ul li:first-child a {
+  width: 1.2rem;
+  height: 0.5rem;
+  display: block;
+  float: left;
+  margin-top: 0.35rem;
+  border-radius: 0.24rem;
+  background-color: #CCC4C2;
+  position: relative;
+}
+.period_container .operation ul li:first-child a span {
+  width: 0.44rem;
+  height: 0.44rem;
+  display: block;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 0.03rem;
+}
+.period_container .operation ul li:first-child a .off {
+  right: 0.04rem;
+}
+.period_container .operation ul li:first-child a .on {
+  right: 0.7rem;
+}
+.period_container .operation ul li:last-child {
+  border-bottom: none;
+}
+.period_container .operation ul li:last-child span {
+  color: #FF8697;
+}
+.period_container .cover {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  display: none;
+  font-size: 0.36rem;
+}
+.period_container .cover .modelBox {
+  width: 7.1rem;
+  height: 5.2rem;
+  background-color: #fff;
+  margin: 2.73rem auto;
+  padding: 0.3rem;
+  color: #444444;
+}
+.period_container .cover .modelBox .dates {
+  height: 2rem;
+  overflow: auto;
+  overflow-y: scroll;
+  font-size: 0.24rem;
+  color: #666666;
+  margin-top: 0.36rem;
+  padding-bottom: 0.1rem;
+}
+.period_container .cover .modelBox .dates::-webkit-scrollbar {
+  display: none;
+}
+.period_container .cover .modelBox h6 {
+  height: 0.56rem;
+}
+.period_container .cover .modelBox h6 span {
+  float: left;
+}
+.period_container .cover .modelBox h6 span i {
+  color: #FF4F73;
+  font-size: 0.4rem;
+}
+.period_container .cover .modelBox > span {
+  height: 0.5rem;
+  font-size: 0.3rem;
+  color: #9A9A9A;
+  display: block;
+}
+.period_container .cover .modelBox ul li.modelBox_li1,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li1,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li1 {
+  height: 0.89rem;
+  line-height: 0.89rem;
+}
+.period_container .cover .modelBox ul li.modelBox_li1 i,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li1 i,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li1 i {
+  font-size: 0.42rem;
+  color: #FF8697;
+}
+.period_container .cover .modelBox ul li.modelBox_li1:nth-child(1) a,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li1:nth-child(1) a,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li1:nth-child(1) a,
+.period_container .cover .modelBox ul li.modelBox_li1:nth-child(2) a,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li1:nth-child(2) a,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li1:nth-child(2) a {
+  width: 1.2rem;
+  height: 0.5rem;
+  display: block;
+  float: left;
+  margin-top: 0.2rem;
+  border-radius: 0.24rem;
+  background-color: #CCC4C2;
+  position: relative;
+}
+.period_container .cover .modelBox ul li.modelBox_li1:nth-child(1) a span,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li1:nth-child(1) a span,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li1:nth-child(1) a span,
+.period_container .cover .modelBox ul li.modelBox_li1:nth-child(2) a span,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li1:nth-child(2) a span,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li1:nth-child(2) a span {
+  width: 0.44rem;
+  height: 0.44rem;
+  display: block;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 0.03rem;
+}
+.period_container .cover .modelBox ul li.modelBox_li1:nth-child(1) a .off,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li1:nth-child(1) a .off,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li1:nth-child(1) a .off,
+.period_container .cover .modelBox ul li.modelBox_li1:nth-child(2) a .off,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li1:nth-child(2) a .off,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li1:nth-child(2) a .off {
+  right: 0.04rem;
+}
+.period_container .cover .modelBox ul li.modelBox_li1:nth-child(1) a .on,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li1:nth-child(1) a .on,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li1:nth-child(1) a .on,
+.period_container .cover .modelBox ul li.modelBox_li1:nth-child(2) a .on,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li1:nth-child(2) a .on,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li1:nth-child(2) a .on {
+  right: 0.7rem;
+}
+.period_container .cover .modelBox ul li.modelBox_li2,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li2,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li2 {
+  width: 0.92rem;
+  height: 0.75rem;
+  text-align: center;
+  line-height: 0.75rem;
+  float: right;
+  border: 0.01rem solid #EBEBEB;
+}
+.period_container .cover .modelBox ul li.modelBox_li2.active,
+.period_container .cover .modelBox ul.modelBox_ul2 li.modelBox_li2.active,
+.period_container .cover .modelBox ul.modelBox_ul3 li.modelBox_li2.active {
+  background-color: #FF4F73;
+}
+.period_container .cover .modelBox ul.modelBox_ul2 {
+  border-left: 0.01rem solid #EBEBEB;
+  border-right: 0.01rem solid #EBEBEB;
+}
+.period_container .cover .modelBox button {
+  width: 1.5rem;
+  height: 0.66rem;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.08rem;
+  margin-right: 1.2rem;
+  margin-top: 0.65rem;
+}
+.period_container .cover .modelBox button.yes {
+  background-color: #38D2EC;
+}
+.period_container .explain {
+  display: none;
+  width: 100%;
+  position: fixed;
+  top: 1.28rem;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 1000;
+  overflow: auto;
+  overflow-y: scroll;
+}
+.period_container .explain::-webkit-scrollbar {
+  display: none;
+}
+.period_container .explain .close_box {
+  height: 1.28rem;
+  position: fixed;
+  top: 0.63rem;
+  font-size: 0.44rem;
+  right: 0.2rem;
+  color: #ffffff;
+  z-index: 100000;
+}
+.period_container .explain .line {
+  margin-top: 0.37rem;
+  padding-top: 0.56rem;
+  height: 1.26rem;
+}
+.period_container .explain .line ul.line_ul {
+  width: 6.2rem;
+  margin: 0 auto;
+  position: relative;
+}
+.period_container .explain .line ul.line_ul li {
+  height: 0.09rem;
+  width: 1.55rem;
+  position: relative;
+  float: left;
+}
+.period_container .explain .line ul.line_ul li.ovulation {
+  width: 0.28rem;
+  height: 0.28rem;
+  border-radius: 50%;
+  border: 1px solid #CCC4C2;
+  background-color: #FCB239;
+  z-index: 2;
+  position: absolute;
+  left: 2.01rem;
+  top: -0.11rem;
+}
+.period_container .explain .line ul.line_ul li.ovulation span {
+  bottom: 0;
+  display: block;
+  top: -0.56rem;
+  right: -0.7rem;
+}
+.period_container .explain .line ul.line_ul li.SafePeriod {
+  background-color: #B5D95E;
+}
+.period_container .explain .line ul.line_ul li.EasyPregnancy {
+  background-color: #D5A5CF;
+}
+.period_container .explain .line ul.line_ul li.physiology {
+  background-color: #FF98B1;
+}
+.period_container .explain .line ul.line_ul li > span {
+  position: absolute;
+  font-size: 0.28rem;
+  color: #8F8F8F;
+  bottom: -0.6rem;
+  right: 0;
+  white-space: nowrap;
+}
+.period_container .explain .line ul.line_ul li > span:first-child {
+  text-align: left;
+  left: 0;
+}
+.period_container .explain .description .description_ul li {
+  margin: 0.36rem 0.3rem;
+}
+.period_container .explain .description .description_ul li div {
+  height: 0.5rem;
+}
+.period_container .explain .description .description_ul li div span {
+  float: right;
+  color: #323232;
+}
+.period_container .explain .description .description_ul li div .circular {
+  width: 0.31rem;
+  height: 0.31rem;
+  display: block;
+  border-radius: 50%;
+  margin-left: 0.28rem;
+}
+.period_container .explain .description .description_ul li div .circular.physiology {
+  background-color: #FF98B1;
+}
+.period_container .explain .description .description_ul li div .circular.SafePeriod {
+  background-color: #B5D95E;
+}
+.period_container .explain .description .description_ul li div .circular.EasyPregnancy {
+  background-color: #D5A5CF;
+}
+.period_container .explain .description .description_ul li div .circular.PredictivePhysiological {
+  background-color: #FFE2E4;
+}
+.period_container .explain .description .description_ul li div .circular.ovulation {
+  background-color: #FCB239;
+}
+.period_container .explain .description .description_ul li div .circular.gestationPeriod {
+  border: 0.01rem solid #FF5178;
+}
+.period_container .explain .description .description_ul li p {
+  color: #8F8F8F;
+}
+.period_container .explain .description .description_ul li:last-child {
+  margin-bottom: 2.4rem;
+}

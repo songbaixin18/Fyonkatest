@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+// 适配的mixin
+// 使用参数来表示各种设备的宽度
+// 主流设备的宽度  320px 360px 375px 384px 400px 414px 424px 480px 540px 600px 720px
+// 基准值  1.设计稿是750px  fontSize 100px(随便定义 但是计算方便)   1.设计稿640px  100px
+// 换算公式  基准值/设计稿宽度*当前设备的宽度
+
+//优化
+//for(var i = 0 ; i < len ; i++)
+//1.起始索引2.最大条件3.每次加一
+//使用自调用 实现变量
+.adapter(@index) when (@index <= @len){
+  @media (min-width: extract(@deviceWidthList,@index)) {
+    html{
+      font-size: @baseFontSize/@psdWidth* extract(@deviceWidthList,@index);
+    }
+  }
+  //自调用
+  .adapter(@index+1);
+}

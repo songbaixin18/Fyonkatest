@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>period</title>
+    <link rel="stylesheet" href="../less/index.css"/>
+    <link rel="stylesheet" href="../assets/fontawesomes/css/font-awesome.css"/>
+</head>
+<body>
+<!--主容器-->
+    <div class="period_container">
+        <!--头部 -->
+        <header>
+            الفترة
+        </header>
+        <!-- 日历-->
+        <div class="calendar" id="calendar">
+            <div class="yearsAndMonths clearfix">
+                <a href="javascript:" class="today" id="today"><span>今天</span></a>
+                <a href="javascript:" class="f_left" id="prev"><i class="fa fa-angle-left"></i> </a>
+                <!-- أيار / مايو  2017 -->
+                <span id="years">2017年</span>
+                <span id="months">05月</span>
+                <a href="javascript:" class="f_right" id="next"><i class="fa fa-angle-right"></i></a>
+            </div>
+
+            <ul class="weeks clearfix">
+                    <li>周日</li>
+                    <li>周一</li>
+                    <li>周二</li>
+                    <li>周三</li>
+                    <li>周四</li>
+                    <li>周五</li>
+                    <li>周六</li>
+            </ul>
+
+            <ul class="days clearfix" id="triggerCover">
+            </ul>
+        </div>
+        <!-- 对应颜色-->
+        <div class="prompt">
+            <ul class="clearfix">
+                <li><span></span> فترة الحيض</li>
+                <li><span></span> التنبؤ  في فترة الحيض </li>
+                <li><span></span> فترة الأمان </li>
+                <li><span></span> سهلة  الحمل </li>
+                <li><span></span> يوم التبويض </li>
+            </ul>
+
+        </div>
+
+        <!-- 操作列表-->
+
+        <div class="operation">
+            <ul>
+                <li id="toDayOnOff_li"><i class="fa fa-circle-thin"></i><span> الحيض </span><a href="javascript:" id="toDayOnOff" class="on_off"><span class="off"></span></a></li>
+                <li id="trigger_duration"><i class="fa fa-circle-thin"></i><span> مدة  الحيض </span></li>
+                <li id="trigger_cycle"><i class="fa fa-circle-thin"></i><span> دورة الحيض </span></li>
+                <li><i class="fa fa-circle-thin"></i><span> الحب </span></li>
+                <li><i class="fa fa-circle-thin"></i><span>  درجة حرارة الجسم  </span></li>
+                <li><i class="fa fa-circle-thin"></i><span>  الوزن  </span></li>
+                <li><i class="fa fa-circle-thin"></i><span>  مزاج  </span></li>
+                <li><i class="fa fa-circle-thin"></i><span>  يوميات </span></li>
+                <li><i class="fa fa-circle-thin"></i><span>  الأعرا </span></li>
+                <li><span> نصائح  في فترة الحيض </span>
+                <p>الحيض  لا  تفعل ممارسة التمارين الرياضية  ، ولكن  كمية  الحركة يمكن  تحسين الدورة الدموية  تساعد على  انقباض  عضلات البطن و  عضلات الحوض  الاسترخاء  يساعد على  تصريف  الدم  .......  مثل  بعض  نوع من  التأمل  تمتد  اليوغا  ،  وما  هي خيارات جيدة. </p>
+                </li>
+            </ul>
+
+        </div>
+        <!--遮挡层1-->
+        <div class="cover">
+            <div class="modelBox">
+               <h6> تعديل  سجل  في فترة الحيض <span id="close" class="close"><i class="fa fa-times"></i></span></h6>
+                <span id="that_day"> 2017-05-17  الأربعاء </span>
+                <ul>
+                    <li class="modelBox_li1"><i class="fa fa-circle-thin"></i><span> الحيض </span><a href="javascript:" class="on_off"><span class=" off " id="kaiguan1" ></span></a></li>
+                    <li class="modelBox_li1"><i class="fa fa-circle-thin"></i><span> الحيض </span><a href="javascript:" class="on_off"><span class=" off " ></span></a></li>
+                    <li class="modelBox_li1"><i class="fa fa-circle-thin"></i><span> مدة  الحيض </span></li>
+                    <li class="modelBox_li1"><i class="fa fa-circle-thin"></i><span> مدة  الحيض </span></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 遮挡层2-->
+        <div class="cover" id="duration">
+            <div class="modelBox">
+                <h6> الرجاء اختيار  فترات  طويلة <span class="close"><i class="fa fa-times"></i></span></h6>
+
+                    <div class="dates">
+                        <ul class="modelBox_ul2" id="modelBox_ul2">
+                            <li class="modelBox_li2">يوم </li>
+                            <li class="modelBox_li2">يومين </li>
+                            <li class="modelBox_li2">3 أيام  </li>
+                            <li class="modelBox_li2">4 أيام </li>
+                            <li class="modelBox_li2">5 أيام </li>
+                            <li class="modelBox_li2">6 أيام </li>
+                            <li class="modelBox_li2">7 أيام </li>
+                            <li class="modelBox_li2">8 أيام </li>
+                            <li class="modelBox_li2">9 أيام </li>
+                            <li class="modelBox_li2">10 أيام </li>
+                            <li class="modelBox_li2">11 يوم</li>
+                            <li class="modelBox_li2">12 يوم</li>
+                            <li class="modelBox_li2">13 يوم</li>
+                            <li class="modelBox_li2">14 يوم</li>
+                            <li class="modelBox_li2">15 يوم</li>
+                            <li class="modelBox_li2">16 يوم</li>
+                            <li class="modelBox_li2">17 يوم</li>
+                            <li class="modelBox_li2">18 يوم</li>
+                            <li class="modelBox_li2">19 يوم</li>
+                            <li class="modelBox_li2">20 يوم</li>
+                            <li class="modelBox_li2">21 يوم</li>
+                            <li class="modelBox_li2">22 يوم</li>
+                            <li class="modelBox_li2">23 يوم</li>
+                            <li class="modelBox_li2">24 يوم</li>
+                            <li class="modelBox_li2">25 يوم</li>
+                            <li class="modelBox_li2">26 يوم</li>
+                            <li class="modelBox_li2">27 يوم</li>
+                            <li class="modelBox_li2">28 يوم</li>
+                            <li class="modelBox_li2">29 يوم</li>
+                            <li class="modelBox_li2">30 يوم</li>
+                            <li class="modelBox_li2">31 يوم</li>
+                            <li class="modelBox_li2">32 يوم</li>
+                            <li class="modelBox_li2">33 يوم</li>
+                            <li class="modelBox_li2">34 يوم</li>
+                            <li class="modelBox_li2">35 يوم</li>
+                            <li class="modelBox_li2">36 يوم</li>
+                            <li class="modelBox_li2">37 يوم</li>
+                            <li class="modelBox_li2">38 يوم</li>
+                            <li class="modelBox_li2">39 يوم</li>
+                            <li class="modelBox_li2">40 يوم</li>
+                            <li class="modelBox_li2">41 يوم</li>
+                            <li class="modelBox_li2">42 يوم</li>
+                            <li class="modelBox_li2">43 يوم</li>
+                            <li class="modelBox_li2">44 يوم</li>
+                            <li class="modelBox_li2">45 يوم</li>
+                            <li class="modelBox_li2">46 يوم</li>
+                            <li class="modelBox_li2">47 يوم</li>
+                            <li class="modelBox_li2">48 يوم</li>
+                            <li class="modelBox_li2">49 يوم</li>
+                            <li class="modelBox_li2">50 يوم</li>
+                            <li class="modelBox_li2">51 يوم</li>
+                            <li class="modelBox_li2">52 يوم</li>
+                            <li class="modelBox_li2">53 يوم</li>
+                            <li class="modelBox_li2">54 يوم</li>
+                            <li class="modelBox_li2">55 يوم</li>
+                            <li class="modelBox_li2">56 يوم</li>
+                            <li class="modelBox_li2">57 يوم</li>
+                            <li class="modelBox_li2">58 يوم</li>
+                            <li class="modelBox_li2">59 يوم</li>
+                            <li class="modelBox_li2">60 يوم</li>
+                            <li class="modelBox_li2">61 يوم</li>
+                            <li class="modelBox_li2">62 يوم</li>
+                            <li class="modelBox_li2">63 يوم</li>
+                            <li class="modelBox_li2">64 يوم</li>
+                            <li class="modelBox_li2">65 يوم</li>
+                            <li class="modelBox_li2">66 يوم</li>
+                            <li class="modelBox_li2">67 يوم</li>
+                            <li class="modelBox_li2">68 يوم</li>
+                            <li class="modelBox_li2">69 يوم</li>
+                            <li class="modelBox_li2">70 يوم</li>
+                            <li class="modelBox_li2">71 يوم</li>
+                            <li class="modelBox_li2">72 يوم</li>
+                            <li class="modelBox_li2">73 يوم</li>
+                            <li class="modelBox_li2">74 يوم</li>
+                            <li class="modelBox_li2">75 يوم</li>
+                            <li class="modelBox_li2">76 يوم</li>
+                            <li class="modelBox_li2">77 يوم</li>
+                            <li class="modelBox_li2">78 يوم</li>
+                            <li class="modelBox_li2">79 يوم</li>
+                            <li class="modelBox_li2">80 يوم</li>
+                            <li class="modelBox_li2">81 يوم</li>
+                            <li class="modelBox_li2">82 يوم</li>
+                            <li class="modelBox_li2">83 يوم</li>
+                            <li class="modelBox_li2">84 يوم</li>
+                            <li class="modelBox_li2">85 يوم</li>
+                            <li class="modelBox_li2">86 يوم</li>
+                            <li class="modelBox_li2">87 يوم</li>
+                            <li class="modelBox_li2">88 يوم</li>
+                            <li class="modelBox_li2">89 يوم</li>
+                            <li class="modelBox_li2">90 يوم</li>
+                            <li class="modelBox_li2">91 يوم</li>
+                            <li class="modelBox_li2">92 يوم</li>
+                            <li class="modelBox_li2">93 يوم</li>
+                            <li class="modelBox_li2">94 يوم</li>
+                            <li class="modelBox_li2">95 يوم</li>
+                            <li class="modelBox_li2">96 يوم</li>
+                            <li class="modelBox_li2">97 يوم</li>
+                            <li class="modelBox_li2">98 يوم</li>
+                            <li class="modelBox_li2">99 يوم</li>
+                            <li class="modelBox_li2">100 يوم</li>
+                        </ul>
+                    </div>
+                <!--<form >-->
+                <div>
+                    <button class="yes" id="yes_duration">确定</button>
+                    <button class="close">取消</button>
+                <!--</form>--></div>
+            </div>
+        </div>
+        <!-- 遮挡层3-->
+        <div class="cover" id="cycle">
+            <div class="modelBox">
+                <h6> الرجاء اختيار  فترات  طويلة <span class="close"><i class="fa fa-times"></i></span></h6>
+                <div class="dates">
+                    <ul class="modelBox_ul3">
+                        <li class="modelBox_li2">يوم </li>
+                        <li class="modelBox_li2">يومين </li>
+                        <li class="modelBox_li2">3 أيام  </li>
+                        <li class="modelBox_li2">4 أيام </li>
+                        <li class="modelBox_li2">5 أيام </li>
+                        <li class="modelBox_li2">6 أيام </li>
+                        <li class="modelBox_li2">7 أيام </li>
+                        <li class="modelBox_li2">8 أيام </li>
+                        <li class="modelBox_li2">9 أيام </li>
+                        <li class="modelBox_li2">10 أيام </li>
+                        <li class="modelBox_li2">11 يوم</li>
+                        <li class="modelBox_li2">12 يوم</li>
+                        <li class="modelBox_li2">13 يوم</li>
+                        <li class="modelBox_li2">14 يوم</li>
+                        <li class="modelBox_li2">15 يوم</li>
+                        <li class="modelBox_li2">16 يوم</li>
+                        <li class="modelBox_li2">17 يوم</li>
+                        <li class="modelBox_li2">18 يوم</li>
+                        <li class="modelBox_li2">19 يوم</li>
+                        <li class="modelBox_li2">20 يوم</li>
+                        <li class="modelBox_li2">21 يوم</li>
+                        <li class="modelBox_li2">22 يوم</li>
+                        <li class="modelBox_li2">23 يوم</li>
+                        <li class="modelBox_li2">24 يوم</li>
+                        <li class="modelBox_li2">25 يوم</li>
+                        <li class="modelBox_li2">26 يوم</li>
+                        <li class="modelBox_li2">27 يوم</li>
+                        <li class="modelBox_li2">28 يوم</li>
+                        <li class="modelBox_li2">29 يوم</li>
+                        <li class="modelBox_li2">30 يوم</li>
+                        <li class="modelBox_li2">31 يوم</li>
+                        <li class="modelBox_li2">32 يوم</li>
+                        <li class="modelBox_li2">33 يوم</li>
+                        <li class="modelBox_li2">34 يوم</li>
+                        <li class="modelBox_li2">35 يوم</li>
+                        <li class="modelBox_li2">36 يوم</li>
+                        <li class="modelBox_li2">37 يوم</li>
+                        <li class="modelBox_li2">38 يوم</li>
+                        <li class="modelBox_li2">39 يوم</li>
+                        <li class="modelBox_li2">40 يوم</li>
+                        <li class="modelBox_li2">41 يوم</li>
+                        <li class="modelBox_li2">42 يوم</li>
+                        <li class="modelBox_li2">43 يوم</li>
+                        <li class="modelBox_li2">44 يوم</li>
+                        <li class="modelBox_li2">45 يوم</li>
+                        <li class="modelBox_li2">46 يوم</li>
+                        <li class="modelBox_li2">47 يوم</li>
+                        <li class="modelBox_li2">48 يوم</li>
+                        <li class="modelBox_li2">49 يوم</li>
+                        <li class="modelBox_li2">50 يوم</li>
+                        <li class="modelBox_li2">51 يوم</li>
+                        <li class="modelBox_li2">52 يوم</li>
+                        <li class="modelBox_li2">53 يوم</li>
+                        <li class="modelBox_li2">54 يوم</li>
+                        <li class="modelBox_li2">55 يوم</li>
+                        <li class="modelBox_li2">56 يوم</li>
+                        <li class="modelBox_li2">57 يوم</li>
+                        <li class="modelBox_li2">58 يوم</li>
+                        <li class="modelBox_li2">59 يوم</li>
+                        <li class="modelBox_li2">60 يوم</li>
+                        <li class="modelBox_li2">61 يوم</li>
+                        <li class="modelBox_li2">62 يوم</li>
+                        <li class="modelBox_li2">63 يوم</li>
+                        <li class="modelBox_li2">64 يوم</li>
+                        <li class="modelBox_li2">65 يوم</li>
+                        <li class="modelBox_li2">66 يوم</li>
+                        <li class="modelBox_li2">67 يوم</li>
+                        <li class="modelBox_li2">68 يوم</li>
+                        <li class="modelBox_li2">69 يوم</li>
+                        <li class="modelBox_li2">70 يوم</li>
+                        <li class="modelBox_li2">71 يوم</li>
+                        <li class="modelBox_li2">72 يوم</li>
+                        <li class="modelBox_li2">73 يوم</li>
+                        <li class="modelBox_li2">74 يوم</li>
+                        <li class="modelBox_li2">75 يوم</li>
+                        <li class="modelBox_li2">76 يوم</li>
+                        <li class="modelBox_li2">77 يوم</li>
+                        <li class="modelBox_li2">78 يوم</li>
+                        <li class="modelBox_li2">79 يوم</li>
+                        <li class="modelBox_li2">80 يوم</li>
+                        <li class="modelBox_li2">81 يوم</li>
+                        <li class="modelBox_li2">82 يوم</li>
+                        <li class="modelBox_li2">83 يوم</li>
+                        <li class="modelBox_li2">84 يوم</li>
+                        <li class="modelBox_li2">85 يوم</li>
+                        <li class="modelBox_li2">86 يوم</li>
+                        <li class="modelBox_li2">87 يوم</li>
+                        <li class="modelBox_li2">88 يوم</li>
+                        <li class="modelBox_li2">89 يوم</li>
+                        <li class="modelBox_li2">90 يوم</li>
+                        <li class="modelBox_li2">91 يوم</li>
+                        <li class="modelBox_li2">92 يوم</li>
+                        <li class="modelBox_li2">93 يوم</li>
+                        <li class="modelBox_li2">94 يوم</li>
+                        <li class="modelBox_li2">95 يوم</li>
+                        <li class="modelBox_li2">96 يوم</li>
+                        <li class="modelBox_li2">97 يوم</li>
+                        <li class="modelBox_li2">98 يوم</li>
+                        <li class="modelBox_li2">99 يوم</li>
+                        <li class="modelBox_li2">100 يوم</li>
+                        <li class="modelBox_li2">101 يوم</li>
+                        <li class="modelBox_li2">102 يوم</li>
+                        <li class="modelBox_li2">103 يوم</li>
+                        <li class="modelBox_li2">104 يوم</li>
+                        <li class="modelBox_li2">105 يوم</li>
+                        <li class="modelBox_li2">106 يوم</li>
+                        <li class="modelBox_li2">107 يوم</li>
+                        <li class="modelBox_li2">108 يوم</li>
+                        <li class="modelBox_li2">109 يوم</li>
+                        <li class="modelBox_li2">110 يوم</li>
+                        <li class="modelBox_li2">111 يوم</li>
+                        <li class="modelBox_li2">112 يوم</li>
+                        <li class="modelBox_li2">113 يوم</li>
+                        <li class="modelBox_li2">114 يوم</li>
+                        <li class="modelBox_li2">115 يوم</li>
+                        <li class="modelBox_li2">116 يوم</li>
+                        <li class="modelBox_li2">117 يوم</li>
+                        <li class="modelBox_li2">118 يوم</li>
+                        <li class="modelBox_li2">119 يوم</li>
+                        <li class="modelBox_li2">120 يوم</li>
+                        <li class="modelBox_li2">121 يوم</li>
+                        <li class="modelBox_li2">122 يوم</li>
+                        <li class="modelBox_li2">123 يوم</li>
+                        <li class="modelBox_li2">124 يوم</li>
+                        <li class="modelBox_li2">125 يوم</li>
+                        <li class="modelBox_li2">126 يوم</li>
+                        <li class="modelBox_li2">127 يوم</li>
+                        <li class="modelBox_li2">128 يوم</li>
+                        <li class="modelBox_li2">129 يوم</li>
+                        <li class="modelBox_li2">130 يوم</li>
+                        <li class="modelBox_li2">131 يوم</li>
+                        <li class="modelBox_li2">132 يوم</li>
+                        <li class="modelBox_li2">133 يوم</li>
+                        <li class="modelBox_li2">134 يوم</li>
+                        <li class="modelBox_li2">135 يوم</li>
+                        <li class="modelBox_li2">136 يوم</li>
+                        <li class="modelBox_li2">137 يوم</li>
+                        <li class="modelBox_li2">138 يوم</li>
+                        <li class="modelBox_li2">139 يوم</li>
+                        <li class="modelBox_li2">140 يوم</li>
+                        <li class="modelBox_li2">141 يوم</li>
+                        <li class="modelBox_li2">142 يوم</li>
+                        <li class="modelBox_li2">143 يوم</li>
+                        <li class="modelBox_li2">144 يوم</li>
+                        <li class="modelBox_li2">145 يوم</li>
+                        <li class="modelBox_li2">146 يوم</li>
+                        <li class="modelBox_li2">147 يوم</li>
+                        <li class="modelBox_li2">148 يوم</li>
+                        <li class="modelBox_li2">149 يوم</li>
+                        <li class="modelBox_li2">150 يوم</li>
+                        <li class="modelBox_li2">151 يوم</li>
+                        <li class="modelBox_li2">152 يوم</li>
+                        <li class="modelBox_li2">153 يوم</li>
+                        <li class="modelBox_li2">154 يوم</li>
+                        <li class="modelBox_li2">155 يوم</li>
+                        <li class="modelBox_li2">156 يوم</li>
+                        <li class="modelBox_li2">157 يوم</li>
+                        <li class="modelBox_li2">158 يوم</li>
+                        <li class="modelBox_li2">159 يوم</li>
+                        <li class="modelBox_li2">160 يوم</li>
+                        <li class="modelBox_li2">161 يوم</li>
+                        <li class="modelBox_li2">162 يوم</li>
+                        <li class="modelBox_li2">163 يوم</li>
+                        <li class="modelBox_li2">164 يوم</li>
+                        <li class="modelBox_li2">165 يوم</li>
+                        <li class="modelBox_li2">166 يوم</li>
+                        <li class="modelBox_li2">167 يوم</li>
+                        <li class="modelBox_li2">168 يوم</li>
+                        <li class="modelBox_li2">169 يوم</li>
+                        <li class="modelBox_li2">170 يوم</li>
+                        <li class="modelBox_li2">171 يوم</li>
+                        <li class="modelBox_li2">172 يوم</li>
+                        <li class="modelBox_li2">173 يوم</li>
+                        <li class="modelBox_li2">174 يوم</li>
+                        <li class="modelBox_li2">175 يوم</li>
+                        <li class="modelBox_li2">176 يوم</li>
+                        <li class="modelBox_li2">177 يوم</li>
+                        <li class="modelBox_li2">178 يوم</li>
+                        <li class="modelBox_li2">179 يوم</li>
+                        <li class="modelBox_li2">180 يوم</li>
+                        <li class="modelBox_li2">181 يوم</li>
+                        <li class="modelBox_li2">182 يوم</li>
+                        <li class="modelBox_li2">183 يوم</li>
+                        <li class="modelBox_li2">184 يوم</li>
+                        <li class="modelBox_li2">185 يوم</li>
+                        <li class="modelBox_li2">186 يوم</li>
+                        <li class="modelBox_li2">187 يوم</li>
+                        <li class="modelBox_li2">188 يوم</li>
+                        <li class="modelBox_li2">189 يوم</li>
+                        <li class="modelBox_li2">190 يوم</li>
+                        <li class="modelBox_li2">191 يوم</li>
+                        <li class="modelBox_li2">192 يوم</li>
+                        <li class="modelBox_li2">193 يوم</li>
+                        <li class="modelBox_li2">194 يوم</li>
+                        <li class="modelBox_li2">195 يوم</li>
+                        <li class="modelBox_li2">196 يوم</li>
+                        <li class="modelBox_li2">197 يوم</li>
+                        <li class="modelBox_li2">198 يوم</li>
+                        <li class="modelBox_li2">199 يوم</li>
+                        <li class="modelBox_li2">200 يوم</li>
+                        <li class="modelBox_li2">201 يوم</li>
+                        <li class="modelBox_li2">202 يوم</li>
+                        <li class="modelBox_li2">203 يوم</li>
+                        <li class="modelBox_li2">204 يوم</li>
+                        <li class="modelBox_li2">205 يوم</li>
+                        <li class="modelBox_li2">206 يوم</li>
+                        <li class="modelBox_li2">207 يوم</li>
+                        <li class="modelBox_li2">208 يوم</li>
+                        <li class="modelBox_li2">209 يوم</li>
+                        <li class="modelBox_li2">210 يوم</li>
+                        <li class="modelBox_li2">211 يوم</li>
+                        <li class="modelBox_li2">212 يوم</li>
+                        <li class="modelBox_li2">213 يوم</li>
+                        <li class="modelBox_li2">214 يوم</li>
+                        <li class="modelBox_li2">215 يوم</li>
+                        <li class="modelBox_li2">216 يوم</li>
+                        <li class="modelBox_li2">217 يوم</li>
+                        <li class="modelBox_li2">218 يوم</li>
+                        <li class="modelBox_li2">219 يوم</li>
+                        <li class="modelBox_li2">220 يوم</li>
+                        <li class="modelBox_li2">221 يوم</li>
+                        <li class="modelBox_li2">222 يوم</li>
+                        <li class="modelBox_li2">223 يوم</li>
+                        <li class="modelBox_li2">224 يوم</li>
+                        <li class="modelBox_li2">225 يوم</li>
+                        <li class="modelBox_li2">226 يوم</li>
+                        <li class="modelBox_li2">227 يوم</li>
+                        <li class="modelBox_li2">228 يوم</li>
+                        <li class="modelBox_li2">229 يوم</li>
+                        <li class="modelBox_li2">230 يوم</li>
+                        <li class="modelBox_li2">231 يوم</li>
+                        <li class="modelBox_li2">232 يوم</li>
+                        <li class="modelBox_li2">233 يوم</li>
+                        <li class="modelBox_li2">234 يوم</li>
+                        <li class="modelBox_li2">235 يوم</li>
+                        <li class="modelBox_li2">236 يوم</li>
+                        <li class="modelBox_li2">237 يوم</li>
+                        <li class="modelBox_li2">238 يوم</li>
+                        <li class="modelBox_li2">239 يوم</li>
+                        <li class="modelBox_li2">240 يوم</li>
+                        <li class="modelBox_li2">241 يوم</li>
+                        <li class="modelBox_li2">242 يوم</li>
+                        <li class="modelBox_li2">243 يوم</li>
+                        <li class="modelBox_li2">244 يوم</li>
+                        <li class="modelBox_li2">245 يوم</li>
+                        <li class="modelBox_li2">246 يوم</li>
+                        <li class="modelBox_li2">247 يوم</li>
+                        <li class="modelBox_li2">248 يوم</li>
+                        <li class="modelBox_li2">249 يوم</li>
+                        <li class="modelBox_li2">250 يوم</li>
+                        <li class="modelBox_li2">251 يوم</li>
+                        <li class="modelBox_li2">252 يوم</li>
+                        <li class="modelBox_li2">253 يوم</li>
+                        <li class="modelBox_li2">254 يوم</li>
+                        <li class="modelBox_li2">255 يوم</li>
+                        <li class="modelBox_li2">256 يوم</li>
+                        <li class="modelBox_li2">257 يوم</li>
+                        <li class="modelBox_li2">258 يوم</li>
+                        <li class="modelBox_li2">259 يوم</li>
+                        <li class="modelBox_li2">260 يوم</li>
+                        <li class="modelBox_li2">261 يوم</li>
+                        <li class="modelBox_li2">262 يوم</li>
+                        <li class="modelBox_li2">263 يوم</li>
+                        <li class="modelBox_li2">264 يوم</li>
+                        <li class="modelBox_li2">265 يوم</li>
+                        <li class="modelBox_li2">266 يوم</li>
+                        <li class="modelBox_li2">267 يوم</li>
+                        <li class="modelBox_li2">268 يوم</li>
+                        <li class="modelBox_li2">269 يوم</li>
+                        <li class="modelBox_li2">270 يوم</li>
+                        <li class="modelBox_li2">271 يوم</li>
+                        <li class="modelBox_li2">272 يوم</li>
+                        <li class="modelBox_li2">273 يوم</li>
+                        <li class="modelBox_li2">274 يوم</li>
+                        <li class="modelBox_li2">275 يوم</li>
+                        <li class="modelBox_li2">276 يوم</li>
+                        <li class="modelBox_li2">277 يوم</li>
+                        <li class="modelBox_li2">278 يوم</li>
+                        <li class="modelBox_li2">279 يوم</li>
+                        <li class="modelBox_li2">280 يوم</li>
+                        <li class="modelBox_li2">281 يوم</li>
+                        <li class="modelBox_li2">282 يوم</li>
+                        <li class="modelBox_li2">283 يوم</li>
+                        <li class="modelBox_li2">284 يوم</li>
+                        <li class="modelBox_li2">285 يوم</li>
+                        <li class="modelBox_li2">286 يوم</li>
+                        <li class="modelBox_li2">287 يوم</li>
+                        <li class="modelBox_li2">288 يوم</li>
+                        <li class="modelBox_li2">289 يوم</li>
+                        <li class="modelBox_li2">290 يوم</li>
+                        <li class="modelBox_li2">291 يوم</li>
+                        <li class="modelBox_li2">292 يوم</li>
+                        <li class="modelBox_li2">293 يوم</li>
+                        <li class="modelBox_li2">294 يوم</li>
+                        <li class="modelBox_li2">295 يوم</li>
+                        <li class="modelBox_li2">296 يوم</li>
+                        <li class="modelBox_li2">297 يوم</li>
+                        <li class="modelBox_li2">298 يوم</li>
+                        <li class="modelBox_li2">299 يوم</li>
+                        <li class="modelBox_li2">300 يوم</li>
+                        <li class="modelBox_li2">301 يوم</li>
+                        <li class="modelBox_li2">302 يوم</li>
+                        <li class="modelBox_li2">303 يوم</li>
+                        <li class="modelBox_li2">304 يوم</li>
+                        <li class="modelBox_li2">305 يوم</li>
+                        <li class="modelBox_li2">306 يوم</li>
+                        <li class="modelBox_li2">307 يوم</li>
+                        <li class="modelBox_li2">308 يوم</li>
+                        <li class="modelBox_li2">309 يوم</li>
+                        <li class="modelBox_li2">310 يوم</li>
+                        <li class="modelBox_li2">311 يوم</li>
+                        <li class="modelBox_li2">312 يوم</li>
+                        <li class="modelBox_li2">313 يوم</li>
+                        <li class="modelBox_li2">314 يوم</li>
+                        <li class="modelBox_li2">315 يوم</li>
+                        <li class="modelBox_li2">316 يوم</li>
+                        <li class="modelBox_li2">317 يوم</li>
+                        <li class="modelBox_li2">318 يوم</li>
+                        <li class="modelBox_li2">319 يوم</li>
+                        <li class="modelBox_li2">320 يوم</li>
+                        <li class="modelBox_li2">321 يوم</li>
+                        <li class="modelBox_li2">322 يوم</li>
+                        <li class="modelBox_li2">323 يوم</li>
+                        <li class="modelBox_li2">324 يوم</li>
+                        <li class="modelBox_li2">325 يوم</li>
+                        <li class="modelBox_li2">326 يوم</li>
+                        <li class="modelBox_li2">327 يوم</li>
+                        <li class="modelBox_li2">328 يوم</li>
+                        <li class="modelBox_li2">329 يوم</li>
+                        <li class="modelBox_li2">330 يوم</li>
+                        <li class="modelBox_li2">331 يوم</li>
+                        <li class="modelBox_li2">332 يوم</li>
+                        <li class="modelBox_li2">333 يوم</li>
+                        <li class="modelBox_li2">334 يوم</li>
+                        <li class="modelBox_li2">335 يوم</li>
+                        <li class="modelBox_li2">336 يوم</li>
+                        <li class="modelBox_li2">337 يوم</li>
+                        <li class="modelBox_li2">338 يوم</li>
+                        <li class="modelBox_li2">339 يوم</li>
+                        <li class="modelBox_li2">340 يوم</li>
+                        <li class="modelBox_li2">341 يوم</li>
+                        <li class="modelBox_li2">342 يوم</li>
+                        <li class="modelBox_li2">343 يوم</li>
+                        <li class="modelBox_li2">344 يوم</li>
+                        <li class="modelBox_li2">345 يوم</li>
+                        <li class="modelBox_li2">346 يوم</li>
+                        <li class="modelBox_li2">347 يوم</li>
+                        <li class="modelBox_li2">348 يوم</li>
+                        <li class="modelBox_li2">349 يوم</li>
+                        <li class="modelBox_li2">350 يوم</li>
+                        <li class="modelBox_li2">351 يوم</li>
+                        <li class="modelBox_li2">352 يوم</li>
+                        <li class="modelBox_li2">353 يوم</li>
+                        <li class="modelBox_li2">354 يوم</li>
+                        <li class="modelBox_li2">355 يوم</li>
+                        <li class="modelBox_li2">356 يوم</li>
+                        <li class="modelBox_li2">357 يوم</li>
+                        <li class="modelBox_li2">358 يوم</li>
+                        <li class="modelBox_li2">359 يوم</li>
+                        <li class="modelBox_li2">360 يوم</li>
+                        <li class="modelBox_li2">361 يوم</li>
+                        <li class="modelBox_li2">362 يوم</li>
+                        <li class="modelBox_li2">363 يوم</li>
+                        <li class="modelBox_li2">364 يوم</li>
+                        <li class="modelBox_li2">365 يوم</li>
+
+                    </ul>
+                </div>
+                <div>
+                    <button class="yes" id="yes_cycle">确定</button>
+                    <button class="close">取消</button>
+                </div>
+            </div>
+        </div>
+        <!-- 名词解释-->
+        <div class="explain">
+            <div class="close_box">
+                <div>
+                    <span class="close"><i class="fa fa-angle-right"></i> </span>
+                </div>
+            </div>
+            <div class="line">
+
+                <ul class="line_ul">
+                    <li class="SafePeriod"> <span > فترة الأمان </span></li>
+                    <li class="ovulation"><span > فترة التبويض </span></li>
+                    <li class="EasyPregnancy"><span > سهلة  الحمل  </span></li>
+                    <li class="SafePeriod"><span > فترة الأمان </span></li>
+                    <li class="physiology"><span > فترة الحيض </span></li>
+                </ul>
+            </div>
+            <div class="description">
+                <ul class="description_ul">
+                    <li>
+                        <div class="clearfix ">
+                            <span class="circular physiology"></span>
+                            <span> فترة الحيض </span>
+                        </div>
+                        <p> الحيض هو  من الناحية الفسيولوجية  دورة  تحدث في  بعض  البشر و الشمبانزي  الخصوبة  من النساء  مع الآخرين  بين  قسم  الحيوانات  .  الأبقار  ،  الإبل، 
+                        </p>
+
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <span class="circular PredictivePhysiological"></span>
+                            <span> فترة الحيض </span>
+                        </div>
+                        <p> الحيض هو  من الناحية الفسيولوجية  دورة  تحدث في  بعض  البشر و الشمبانزي  الخصوبة  من النساء  مع الآخرين  بين  قسم  الحيوانات  .  الأبقار  ،  الإبل، 
+                        </p>
+
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <span class="circular SafePeriod"></span>
+                            <span> فترة الحيض </span>
+                        </div>
+                        <p> الحيض هو  من الناحية الفسيولوجية  دورة  تحدث في  بعض  البشر و الشمبانزي  الخصوبة  من النساء  مع الآخرين  بين  قسم  الحيوانات  .  الأبقار  ،  الإبل، 
+                        </p>
+
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <span class="circular EasyPregnancy"></span>
+                            <span> فترة الحيض </span>
+                        </div>
+                        <p> الحيض هو  من الناحية الفسيولوجية  دورة  تحدث في  بعض  البشر و الشمبانزي  الخصوبة  من النساء  مع الآخرين  بين  قسم  الحيوانات  .  الأبقار  ،  الإبل، 
+                        </p>
+
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <span class="circular ovulation"></span>
+                            <span> فترة الحيض </span>
+                        </div>
+                        <p> الحيض هو  من الناحية الفسيولوجية  دورة  تحدث في  بعض  البشر و الشمبانزي  الخصوبة  من النساء  مع الآخرين  بين  قسم  الحيوانات  .  الأبقار  ،  الإبل، 
+                        </p>
+
+                    </li>
+                    <li>
+                        <div class="clearfix">
+                            <span class="circular gestationPeriod"></span>
+                            <span> فترة الحيض </span>
+                        </div>
+                        <p> الحيض هو  من الناحية الفسيولوجية  دورة  تحدث في  بعض  البشر و الشمبانزي  الخصوبة  من النساء  مع الآخرين  بينث في  بعض  البشر و الشمبانزي  الخصوبة  من النساء  مع الآخرين  بين
+                        </p>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+    </div>
+<script src="../js/jquery-1.7.2.js"></script>
+<script src="../js/date.js"></script>
+<script src="../js/period.js"></script>
+
+</body>
+</html>
