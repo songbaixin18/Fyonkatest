@@ -115,19 +115,9 @@
         // 经期时长
         let dataTime = periodInfo.duration - 1;
 
-        /*let worker = new Worker('../js/demo_workers.js');
-        worker.addEventListener('message', function (event) {
-            alert(event.data);
-        }, false);
-        worker.addEventListener("error", function (event) {
-            alert("Line #" + event.lineno + " - " + event.message + " in " + event.filename);
-        }, false);
-        worker.postMessage(1);*/
-
         // 加载日历
         function render() {
             days.innerHTML = '';
-            // 生成动态元素
             let firstDayOfWeek = F.getWeekInMonth(year, month);
             for (let i = 0; i < firstDayOfWeek; i++) {
                 let li_none = document.createElement('li');
@@ -145,11 +135,8 @@
                 days.appendChild(li_none)
             }
             const triggers = triggerCover.children;
-
-            // 本月最大日期，用于判断
             let thisMonthMaxDate = F.getLastDayInMonth(year,month);
             AddDays(thisMonthMaxDate , dataCycle);
-            // 当前时间，用于判断
             let currentDate = new Date();
             let lastPeriodDateStartTemp;
             // 预测经期处理显示
@@ -299,7 +286,7 @@
                     }
                 }
             }
-            // 遮挡层
+            // 遮挡层1
             const that_day = document.querySelector('#that_day');
             const cover = document.getElementsByClassName('cover')[0];
             for (let i = 1; i <= F.getDaysInMonth(year,month); i++) {
