@@ -8,11 +8,13 @@
 }
 html {
   height: 100%;
+  overflow: auto;
 }
 body {
   height: 100%;
   font-size: 14px;
   font-family: 'Microsoft YaHei', sans-serif;
+  overflow: auto;
 }
 a {
   color: #333;
@@ -29,6 +31,10 @@ textarea {
   outline: none;
   resize: none;
   -webkit-appearance: none;
+}
+.today {
+  float: left;
+  margin-right: 10px;
 }
 .f_left {
   float: left;

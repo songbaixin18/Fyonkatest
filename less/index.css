@@ -79,11 +79,13 @@
 }
 html {
   height: 100%;
+  overflow: auto;
 }
 body {
   height: 100%;
   font-size: 14px;
   font-family: 'Microsoft YaHei', sans-serif;
+  overflow: auto;
 }
 a {
   color: #333;
@@ -101,9 +103,9 @@ textarea {
   resize: none;
   -webkit-appearance: none;
 }
-.today{
+.today {
   float: left;
-  padding: 0 0.3rem;
+  margin-right: 10px;
 }
 .f_left {
   float: left;
@@ -152,7 +154,7 @@ textarea {
   color: #FF4F73;
   text-align: center;
   background-color: #fff;
-  padding: 0 0.3rem 0 0;
+  padding: 0 0.3rem;
 }
 .period_container .calendar .yearsAndMonths a {
   color: #FF4F73;
@@ -471,7 +473,7 @@ textarea {
   height: 0.28rem;
   border-radius: 50%;
   border: 1px solid #CCC4C2;
-  background-color: #FCB239;
+  background-color: #000000;
   z-index: 2;
   position: absolute;
   left: 2.01rem;
@@ -488,9 +490,6 @@ textarea {
 }
 .period_container .explain .line ul.line_ul li.EasyPregnancy {
   background-color: #D5A5CF;
-}
-.period_container .explain .line ul.line_ul li.physiology {
-  background-color: #FF98B1;
 }
 .period_container .explain .line ul.line_ul li > span {
   position: absolute;

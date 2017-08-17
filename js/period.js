@@ -81,9 +81,11 @@
         // 页面中的年月标签
         const years = document.querySelector('#years');
         const months = document.querySelector('#months');
-        // 开关
+        // 操作列表开关
         const toDayOnOff = document.querySelector('#toDayOnOff');
-
+        // 遮挡层1 开关
+        const selectedStartOnOff = document.querySelector('#selected_startOnOff');
+        const selectedEndOnOff = document.querySelector('#selected_endOnOff');
         // 操作列表
         const toDayOnOff_li = document.querySelector('#toDayOnOff_li');
 
@@ -288,7 +290,7 @@
             }
             // 遮挡层1
             const that_day = document.querySelector('#that_day');
-            const cover = document.getElementsByClassName('cover')[0];
+            const selected = document.getElementById('selected');
             for (let i = 1; i <= F.getDaysInMonth(year,month); i++) {
                 if (new Date(Date.parse(month+"/"+i+"/"+year))<=currentDate) {
                     (function(arg) {
@@ -297,9 +299,25 @@
                                 triggers[j + firstDayOfWeek - 1].style.border = 'none';
                             }
                             this.style.border = '2px solid #FF4F73';
-                            cover.style.display = 'block';
+                            selected.style.display = 'block';
                             that_day.innerHTML = '';
                             that_day.innerText = year + '年' + month + '月' + arg + '日';
+                            if(lastPeriodDateStart===null||new Date()>new Date(Date.parse(lastPeriodDateEnd))){
+                                selectedStartOnOff.style.backgroundColor = '#CCC4C2';
+                                selectedStartOnOff.children[0].className = 'off';
+                            }
+                            if(lastPeriodDateStart===FormatDate(new Date())){
+                                selectedStartOnOff.style.backgroundColor = '#FF4F73';
+                                selectedStartOnOff.children[0].className = 'on';
+                            }
+                            if(lastPeriodDateEnd === '1997-01-01'&&new Date(FormatDate(new Date()))>new Date(Date.parse(lastPeriodDateStart))){
+                                selectedStartOnOff.style.backgroundColor = '#CCC4C2';
+                                selectedStartOnOff.children[0].className = 'off';
+                            }
+                            if(lastPeriodDateEnd===FormatDate(new Date())){
+                                selectedStartOnOff.style.backgroundColor = '#FF4F73';
+                                selectedStartOnOff.children[0].className = 'on';
+                            }
                         })
                     })(i);
                 }
@@ -397,7 +415,6 @@
         function list() {
             let span1 = toDayOnOff_li.children[1];
             let span2 = toDayOnOff_li.children[2];
-            // 当天经期开始结束
             if(lastPeriodDateStart===null||new Date()>new Date(Date.parse(lastPeriodDateEnd))){
                 span1.innerText = '开始？';
                 span2.style.backgroundColor = '#CCC4C2';
