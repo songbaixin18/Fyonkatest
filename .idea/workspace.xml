@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3bbe442-94d9-47d6-931b-7157b7dc25f6" name="默认的" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/demo_workers.js" afterPath="" />
+    <list default="true" id="d3bbe442-94d9-47d6-931b-7157b7dc25f6" name="默认的" comment="准备切换GitHub">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/period.js" afterPath="$PROJECT_DIR$/js/period.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.txt" afterPath="$PROJECT_DIR$/README.txt" />
     </list>
     <ignored path="她1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -143,11 +142,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.7683755">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file leaf-file-name="period.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="period.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/period.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="470" column="39" lean-forward="true" selection-start-line="470" selection-start-column="39" selection-end-line="470" selection-end-column="39" />
+                <state relative-caret-position="307">
+                  <caret line="457" column="26" lean-forward="true" selection-start-line="457" selection-start-column="26" selection-end-line="457" selection-end-column="26" />
                   <folding>
                     <element signature="e#130#965#0" expanded="false" />
                     <element signature="e#1051#1633#0" expanded="false" />
@@ -169,6 +168,16 @@
                     <element signature="e#23486#23884#0" expanded="false" />
                     <element signature="e#23920#24073#0" expanded="false" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="README.txt" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/README.txt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="4" lean-forward="true" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -279,6 +288,7 @@
         <option value="$PROJECT_DIR$/views/test.html" />
         <option value="$PROJECT_DIR$/views/period.html" />
         <option value="$PROJECT_DIR$/js/period.js" />
+        <option value="$PROJECT_DIR$/README.txt" />
       </list>
     </option>
   </component>
@@ -463,10 +473,18 @@
       <workItem from="1502882935430" duration="2262000" />
       <workItem from="1502942711620" duration="1679000" />
     </task>
+    <task id="LOCAL-00001" summary="准备切换GitHub">
+      <created>1502947104097</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1502947104097</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113808000" />
+    <option name="totallyTimeSpent" value="114269000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -588,7 +606,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="拖动测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="拖动测试" />
+    <MESSAGE value="准备切换GitHub" />
+    <option name="LAST_COMMIT_MESSAGE" value="准备切换GitHub" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -675,13 +694,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/less/adapter.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/date.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1001,8 +1013,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/period.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="470" column="39" lean-forward="true" selection-start-line="470" selection-start-column="39" selection-end-line="470" selection-end-column="39" />
+        <state relative-caret-position="307">
+          <caret line="457" column="26" lean-forward="true" selection-start-line="457" selection-start-column="26" selection-end-line="457" selection-end-column="26" />
           <folding>
             <element signature="e#130#965#0" expanded="false" />
             <element signature="e#1051#1633#0" expanded="false" />
@@ -1024,6 +1036,14 @@
             <element signature="e#23486#23884#0" expanded="false" />
             <element signature="e#23920#24073#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="4" lean-forward="true" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
