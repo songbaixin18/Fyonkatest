@@ -477,11 +477,13 @@
                     modelBox_li2[j].className = 'modelBox_li2';
                 }
                 this.className = "modelBox_li2 active";
-                duration_data=parseInt(this.innerText);
-                yes_duration.addEventListener('click', function () {
-                    inPeriodDataRule(1,dataCycle,duration_data,lastPeriodDateStart);
-                })
+                duration_data=i+1;
+                yes_duration.addEventListener('click', yes_duration_click);
             })
+        }
+        function yes_duration_click() {
+            inPeriodDataRule(1,dataCycle,duration_data,lastPeriodDateStart);
+            yes_duration.removeEventListener('click', yes_duration_click);
         }
         //遮挡层3
         //记录经期周期
@@ -499,14 +501,14 @@
                     modelBox_li3[j].className = 'modelBox_li2';
                 }
                 this.className = "modelBox_li2 active";
-                cycle_data=parseInt(this.innerText);
-                yes_cycle.addEventListener('click', function () {
-                    alert(cycle_data);
-                    inPeriodDataRule(1,cycle_data,dataTime,lastPeriodDateStart);
-                })
+                cycle_data=i+1;
+                yes_cycle.addEventListener('click', yes_cycle_click);
             })
         }
-
+        function yes_cycle_click() {
+            inPeriodDataRule(1,cycle_data,dataTime,lastPeriodDateStart);
+            yes_cycle.removeEventListener('click', yes_cycle_click);
+        }
         //名词解释
         const explain = document.querySelector('.explain');
         const prompt = document.querySelector('.prompt');
