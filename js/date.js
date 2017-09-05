@@ -1,102 +1,49 @@
-//替换字符串
-function Replace(str, from, to) {
-    return str.split(from).join(to);
-}
+//js日期类型转换成字符串
 function FormatDate(date) {
-    let year = date.getFullYear();
-    let month = (date.getMonth() + 1).toString();
-    let day = (date.getDate()).toString();
-    if (month.length === 1) {
-        month = "0" + month;
+    var year = date.getFullYear();
+    var month = (date.getMonth() + 1).toString();
+    var day = (date.getDate()).toString();
+    if(month.length === 1){
+        month = '0' + month;
     }
-    if (day.length === 1) {
-        day = "0" + day;
+    if(day.length === 1){
+        day = '0' + day;
     }
-    let dateTime = year + "-" + month + "-" + day;
+    var dateTime = year + "-" + month + "-" + day;
     return dateTime;
 }
 //js日期字符串转换成日期类型
-function parseDate(dateStr) {
-    return new Date(Replace(dateStr, "-", "/"));
+function parseDate(dateString) {
+    if(dateString === null){
+        return new Date('9999/01/01');
+    }
+    var SEPARATOR_BAR = "-";
+    var SEPARATOR_SLASH = "/";
+    var SEPARATOR_DOT = ".";
+    var dateArray;
+    if(dateString.indexOf(SEPARATOR_BAR) > -1){
+        dateArray = dateString.split(SEPARATOR_BAR);
+    }else if(dateString.indexOf(SEPARATOR_SLASH) > -1){
+        dateArray = dateString.split(SEPARATOR_SLASH);
+    }else{
+        dateArray = dateString.split(SEPARATOR_DOT);
+    }
+    return new Date(dateArray[0], dateArray[1]-1, dateArray[2]);
+}
+
+//增加天
+function AddDays(date, value) {
+    date.setDate(date.getDate() + value);
+    return date;
 }
 //增加月
 function AddMonths(date, value) {
     date.setMonth(date.getMonth() + value);
     return date;
 }
-//增加天
-function AddDays(date, value) {
-    date.setDate(date.getDate() + value);
-    return date;
-}
-
-function addDate(date,days){
-    let d=new Date(date);
-    d.setDate(d.getDate()+days);
-    let month=d.getMonth()+1;
-    let day = d.getDate();
-    if(month<10){
-        month = "0"+month;
-    }
-    if(day<10){
-        day = "0"+day;
-    }
-    return d.getFullYear()+""+month+""+day;
-}
-
-//增加时
-function AddHours(date, value) {
-    date.setHours(date.getHours() + value);
-    return date;
-}
-//返回月份(两位数)
-/**
- * @return {string}
- */
-function GetFullMonth(date) {
-    let v = date.getMonth() + 1;
-    if (v > 9) return v.toString();
-    return "0" + v;
-}
-
-//返回日(两位数)
-/**
- * @return {string}
- */
-function GetFullDate(date) {
-    let v = date.getDate();
-    if (v > 9) return v.toString();
-    return "0" + v;
-}
-//返回时(两位数)
-/**
- * @return {string}
- */
-function GetFullHour(date) {
-    let v = date.getHours();
-    if (v > 9) return v.toString();
-    return "0" + v;
-}
-//比较两个日期大小
-function  compareDate(sDate1,sDate2){
-    if(sDate1!==""&&sDate2!==""){
-        let startDate=sDate1.replace(/-/g,"/");
-        let endDate=sDate2.replace(/-/g,"/");
-        let S_Date=new Date(Date.parse(startDate));
-        let E_Date=new Date(Date.parse(endDate));
-        return S_Date <= E_Date;
-    }
-}
-
-
-//取得两个日期的差值
-function exDateRange(sDate1,sDate2){
-    let iDateRange;
-    if(sDate1!==""&&sDate2!==""){
-        let startDate=sDate1.replace(/-/g,"/");
-        let endDate=sDate2.replace(/-/g,"/");
-        let S_Date=new Date(Date.parse(startDate));
-        let E_Date=new Date(Date.parse(endDate));
-        iDateRange=(S_Date-E_Date)/86400000;
-    }
+//计算两个日期之间的月差数
+function Amount(date1, date2) {
+    date1 = date1.getFullYear() * 12 + date1.getMonth()+1;
+    date2 = date2.getFullYear() * 12 + date2.getMonth()+1;
+    return Math.abs(date1 - date2);
 }

@@ -80,6 +80,8 @@
 html {
   height: 100%;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: auto;
 }
 body {
   height: 100%;
@@ -139,7 +141,7 @@ textarea {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 900;
   text-align: center;
 }
 .period_container .calendar {
@@ -218,7 +220,6 @@ textarea {
 }
 .period_container .prompt {
   width: 100%;
-  height: 1.1rem;
   padding-right: 0.4rem;
   margin-top: 0.02rem;
   margin-bottom: 0.1rem;
@@ -249,18 +250,24 @@ textarea {
 .period_container .prompt li:nth-child(5) span {
   background-color: #FCB239;
 }
+.period_container .icon {
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 .period_container .operation ul li {
   height: 1.06rem;
   line-height: 1.06rem;
   border-bottom: 0.01rem solid #E1E1E1;
   padding-right: 0.24rem;
 }
-.period_container .operation ul li i {
-  font-size: 0.42rem;
-  color: #FF8697;
-}
 .period_container .operation ul li span {
   font-size: 0.38rem;
+}
+.period_container .operation ul li svg {
+  color: #FF4F73;
 }
 .period_container .operation ul li:first-child {
   padding-left: 0.25rem;
@@ -290,11 +297,123 @@ textarea {
 .period_container .operation ul li:first-child a .on {
   right: 0.7rem;
 }
+.period_container .operation ul li ul {
+  list-style: none;
+  float: left;
+}
+.period_container .operation ul li ul li {
+  float: left;
+}
+.period_container .operation ul li ul li svg {
+  color: #c0c0c0;
+}
 .period_container .operation ul li:last-child {
   border-bottom: none;
 }
 .period_container .operation ul li:last-child span {
   color: #FF8697;
+}
+.period_container .initCover {
+  display: none;
+  width: 100%;
+  position: fixed;
+  top: 1.28rem;
+  height: 100%;
+  background-color: #E1E1E1;
+  z-index: 999;
+  overflow: auto;
+  overflow-y: scroll;
+}
+.period_container .initCover ul p {
+  margin-top: 20px;
+  font-size: 0.3rem;
+  color: #666666;
+}
+.period_container .initCover ul li {
+  background-color: #ffffff;
+  height: 1.06rem;
+  line-height: 1.06rem;
+  border-bottom: 0.01rem solid #E1E1E1;
+  padding-right: 0.24rem;
+}
+.period_container .initCover ul li span {
+  font-size: 0.38rem;
+}
+.period_container .initCover ul li svg {
+  color: #FF4F73;
+}
+.period_container .initCover ul li ul {
+  list-style: none;
+  float: left;
+}
+.period_container .initCover ul li ul li {
+  float: left;
+}
+.period_container .initCover ul li ul li svg {
+  color: #c0c0c0;
+}
+.period_container .initCover ul li:last-child {
+  margin-top: 30px;
+  border-bottom: none;
+  text-align: center;
+}
+.period_container .initCover ul li:last-child span {
+  color: #FF8697;
+}
+.period_container .init_calendar {
+  padding-top: 50px;
+}
+.period_container .init_calendar .yearsAndMonths {
+  width: 100%;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  color: #FF4F73;
+  text-align: center;
+  background-color: #fff;
+  padding: 0 0.3rem;
+}
+.period_container .init_calendar .yearsAndMonths a {
+  color: #FF4F73;
+}
+.period_container .init_calendar .yearsAndMonths a i {
+  font-size: 0.38rem;
+}
+.period_container .init_calendar .weeks {
+  width: 100%;
+  height: 0.38rem;
+  font-size: 0.24rem;
+  background-color: #fff;
+  margin: 0 auto;
+}
+.period_container .init_calendar .weeks li {
+  width: 1.02rem;
+  height: 0.38rem;
+  line-height: 0.38rem;
+  float: right;
+  text-align: left;
+}
+.period_container .init_calendar .weeks li:first-child,
+.period_container .init_calendar .weeks li:last-child {
+  color: #FF98AB;
+}
+.period_container .init_calendar .init_days {
+  width: 100%;
+  padding-left: 0.04rem;
+  padding-right: 0.02rem;
+  padding-bottom: 0.04rem;
+  font-size: 0.24rem;
+  margin: 0 auto;
+}
+.period_container .init_calendar .init_days li {
+  width: 1.02rem;
+  height: 1.02rem;
+  background-color: #ffffff;
+  border-radius: 0.04rem;
+  float: right;
+  margin-right: 0.04rem;
+  margin-top: 0.04rem;
+  padding: 0.12rem;
+  color: #9A9A9A;
 }
 .period_container .cover {
   width: 100%;
@@ -304,6 +423,7 @@ textarea {
   top: 0;
   display: none;
   font-size: 0.36rem;
+  z-index: 999;
 }
 .period_container .cover .modelBox {
   width: 7.1rem;
@@ -418,16 +538,56 @@ textarea {
   border-right: 0.01rem solid #EBEBEB;
 }
 .period_container .cover .modelBox button {
+  position: absolute;
   width: 1.5rem;
   height: 0.66rem;
   color: #ffffff;
   border: none;
   border-radius: 0.08rem;
-  margin-right: 1.2rem;
   margin-top: 0.65rem;
 }
 .period_container .cover .modelBox button.yes {
+  right: 1.2rem;
   background-color: #38D2EC;
+}
+.period_container .cover .modelBox button.close {
+  left: 1.2rem;
+  background-color: #c0c0c0;
+}
+.period_container .cover .calendarBox {
+  width: 100%;
+  height: 9rem;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  color: #444444;
+}
+.period_container .cover .calendarBox h6 {
+  height: 0.56rem;
+}
+.period_container .cover .calendarBox h6 span {
+  float: left;
+}
+.period_container .cover .calendarBox h6 span i {
+  color: #FF4F73;
+  font-size: 0.4rem;
+}
+.period_container .cover .calendarBox button {
+  position: absolute;
+  width: 1.5rem;
+  height: 0.66rem;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.08rem;
+  margin-top: 0.65rem;
+}
+.period_container .cover .calendarBox button.yes {
+  right: 1.2rem;
+  background-color: #38D2EC;
+}
+.period_container .cover .calendarBox button.close {
+  left: 1.2rem;
+  background-color: #c0c0c0;
 }
 .period_container .explain {
   display: none;
@@ -436,7 +596,7 @@ textarea {
   top: 1.28rem;
   height: 100%;
   background-color: #ffffff;
-  z-index: 1000;
+  z-index: 999;
   overflow: auto;
   overflow-y: scroll;
 }
@@ -444,13 +604,14 @@ textarea {
   display: none;
 }
 .period_container .explain .close_box {
-  height: 1.28rem;
+  height: 1rem;
   position: fixed;
-  top: 0.63rem;
-  font-size: 0.44rem;
+  top: 0.6rem;
+  font-size: 0.4rem;
   right: 0.2rem;
-  color: #ffffff;
-  z-index: 100000;
+}
+.period_container .explain .close_box span svg {
+  color: #38D2EC;
 }
 .period_container .explain .line {
   margin-top: 0.37rem;
@@ -473,7 +634,7 @@ textarea {
   height: 0.28rem;
   border-radius: 50%;
   border: 1px solid #CCC4C2;
-  background-color: #000000;
+  background-color: #FCB239;
   z-index: 2;
   position: absolute;
   left: 2.01rem;
@@ -490,6 +651,9 @@ textarea {
 }
 .period_container .explain .line ul.line_ul li.EasyPregnancy {
   background-color: #D5A5CF;
+}
+.period_container .explain .line ul.line_ul li.physiology {
+  background-color: #FF98B1;
 }
 .period_container .explain .line ul.line_ul li > span {
   position: absolute;

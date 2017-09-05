@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <title>period</title>
     <link rel="stylesheet" href="../less/index.css"/>
-    <link rel="stylesheet" href="../assets/fontawesomes/css/font-awesome.css"/>
+    <script src="../js/iconfont.js"></script>
 </head>
 <body>
 <!--主容器-->
@@ -16,14 +16,18 @@
             الفترة
         </header>
         <!-- 日历-->
-        <div class="calendar" id="calendar">
+        <div class="calendar">
             <div class="yearsAndMonths clearfix">
                 <a href="javascript:" class="today" id="today"><span>今天</span></a>
-                <a href="javascript:" class="f_left" id="prev"><i class="fa fa-angle-left"></i> </a>
+                <a href="javascript:" class="f_left" id="prev">
+                    <svg class="icon" aria-hidden="true"><use xlink:href="#icon-return"></use></svg>
+                </a>
                 <!-- أيار / مايو  2017 -->
                 <span id="years">2017年</span>
                 <span id="months">05月</span>
-                <a href="javascript:" class="f_right" id="next"><i class="fa fa-angle-right"></i></a>
+                <a href="javascript:" class="f_right" id="next">
+                    <svg class="icon" aria-hidden="true"><use xlink:href="#icon-enter"></use></svg>
+                </a>
             </div>
 
             <ul class="weeks clearfix">
@@ -39,7 +43,7 @@
             <ul class="days clearfix" id="triggerCover">
             </ul>
         </div>
-        <!-- 对应颜色-->
+        <!-- 对应颜色说明-->
         <div class="prompt">
             <ul class="clearfix">
                 <li><span></span> فترة الحيض</li>
@@ -55,37 +59,65 @@
 
         <div class="operation">
             <ul>
-                <li id="toDayOnOff_li"><i class="fa fa-circle-thin"></i><span> الحيض </span><a href="javascript:" id="toDayOnOff" class="on_off"><span class="off"></span></a></li>
-                <li id="trigger_duration"><i class="fa fa-circle-thin"></i><span> مدة  الحيض </span></li>
-                <li id="trigger_cycle"><i class="fa fa-circle-thin"></i><span> دورة الحيض </span></li>
-                <li><i class="fa fa-circle-thin"></i><span> الحب </span></li>
-                <li><i class="fa fa-circle-thin"></i><span>  درجة حرارة الجسم  </span></li>
-                <li><i class="fa fa-circle-thin"></i><span>  الوزن  </span></li>
-                <li><i class="fa fa-circle-thin"></i><span>  مزاج  </span></li>
-                <li><i class="fa fa-circle-thin"></i><span>  يوميات </span></li>
-                <li><i class="fa fa-circle-thin"></i><span>  الأعرا </span></li>
+                <li id="toDayOnOff_li"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> الحيض </span><a href="javascript:" id="toDayOnOff" class="on_off"><span class="off"></span></a></li>
+                <li id="trigger_duration"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> مدة  الحيض </span></li>
+                <li id="trigger_cycle"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> دورة الحيض </span></li>
+                <li id="dysmenorrhea"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span>  عسر الطمث  </span>
+                    <ul>
+                        <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
+                        <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
+                        <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
+                        <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
+                        <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
+                    </ul>
+                </li>
+                <li id="flow"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span>  تدفق  </span>
+                    <ul>
+                        <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
+                        <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
+                        <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
+                        <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
+                        <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
+                    </ul>
+                </li>
                 <li><span> نصائح  في فترة الحيض </span>
                 <p>الحيض  لا  تفعل ممارسة التمارين الرياضية  ، ولكن  كمية  الحركة يمكن  تحسين الدورة الدموية  تساعد على  انقباض  عضلات البطن و  عضلات الحوض  الاسترخاء  يساعد على  تصريف  الدم  .......  مثل  بعض  نوع من  التأمل  تمتد  اليوغا  ،  وما  هي خيارات جيدة. </p>
                 </li>
             </ul>
         </div>
+
+        <!-- 初始数据设置 -->
+        <div class="initCover" Id="initCover">
+            <div>
+                <ul>
+                    <p>您的月经大概持续几天？</p>
+                    <li id="init_duration"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> 经期长度 </span></li>
+                    <p>两次月经开始日大概间隔多久？</p>
+                    <li id="init_cycle"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> 周期长度 </span></li>
+                    <p>最近一次月经大概是哪天来的？</p>
+                    <li id="init_lastTime"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> 最近一次月经 </span></li>
+                    <li id="init_enter"><span> 开始使用 </span></li>
+                </ul>
+            </div>
+        </div>
+
         <!--遮挡层1-->
         <div class="cover" id="selected">
             <div class="modelBox">
-               <h6> تعديل  سجل  في فترة الحيض <span id="close" class="close"><i class="fa fa-times"></i></span></h6>
+               <h6> تعديل  سجل  في فترة الحيض <span id="close" class="close"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg></span></h6>
                 <span id="that_day"></span>
                 <ul>
-                    <li class="modelBox_li1"><i class="fa fa-circle-thin"></i><span> الحيض </span><a href="javascript:" class="on_off" id="selected_startOnOff" ><span class=" off "></span></a></li>
-                    <li class="modelBox_li1"><i class="fa fa-circle-thin"></i><span> الحيض </span><a href="javascript:" class="on_off" id="selected_endOnOff" ><span class=" off "></span></a></li>
-                    <li class="modelBox_li1"><i class="fa fa-circle-thin"></i><span> مدة  الحيض </span></li>
-                    <li class="modelBox_li1"><i class="fa fa-circle-thin"></i><span> مدة  الحيض </span></li>
+                    <li class="modelBox_li1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> الحيض </span><a href="javascript:" class="on_off" id="selected_startOnOff" ><span class=" off "></span></a></li>
+                    <li class="modelBox_li1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> الحيض </span><a href="javascript:" class="on_off" id="selected_endOnOff" ><span class=" off "></span></a></li>
+                    <li class="modelBox_li1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> مدة  الحيض </span></li>
+                    <li class="modelBox_li1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> مدة  الحيض </span></li>
                 </ul>
             </div>
         </div>
         <!-- 遮挡层2-->
         <div class="cover" id="duration">
             <div class="modelBox">
-                <h6> الرجاء اختيار  فترات  طويلة <span class="close"><i class="fa fa-times"></i></span></h6>
+                <h6> الرجاء اختيار  فترات  طويلة <span class="close"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg></span></h6>
 
                     <div class="dates">
                         <ul class="modelBox_ul2" id="modelBox_ul2">
@@ -201,7 +233,7 @@
         <!-- 遮挡层3-->
         <div class="cover" id="cycle">
             <div class="modelBox">
-                <h6> الرجاء اختيار  فترات  طويلة <span class="close"><i class="fa fa-times"></i></span></h6>
+                <h6> الرجاء اختيار  فترات  طويلة <span class="close"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg></span></h6>
                 <div class="dates">
                     <ul class="modelBox_ul3">
                         <li class="modelBox_li2">يوم </li>
@@ -578,11 +610,45 @@
                 </div>
             </div>
         </div>
+        <!-- 日期选择-->
+        <div class="cover init_calendar">
+            <div class="calendarBox">
+                <h6> الرجاء اختيار  فترات  طويلة <span class="close"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg></span></h6>
+                <div class="yearsAndMonths clearfix">
+                    <a href="javascript:" class="init_today" id="init_today"><span>今天</span></a>
+                    <a href="javascript:" class="f_left" id="init_prev">
+                        <svg class="icon" aria-hidden="true"><use xlink:href="#icon-return"></use></svg>
+                    </a>
+                    <!-- أيار / مايو  2017 -->
+                    <span id="init_years">2017年</span>
+                    <span id="init_months">05月</span>
+                    <a href="javascript:" class="f_right" id="init_next">
+                        <svg class="icon" aria-hidden="true"><use xlink:href="#icon-enter"></use></svg>
+                    </a>
+                </div>
+
+                <ul class="weeks clearfix">
+                    <li>周日</li>
+                    <li>周一</li>
+                    <li>周二</li>
+                    <li>周三</li>
+                    <li>周四</li>
+                    <li>周五</li>
+                    <li>周六</li>
+                </ul>
+                <ul class="init_days clearfix" id="init_triggerCover">
+                </ul>
+                <div>
+                    <button class="yes" id="yes_calendar">确定</button>
+                    <button class="close">取消</button>
+                </div>
+            </div>
+        </div>
         <!-- 名词解释-->
         <div class="explain">
             <div class="close_box">
                 <div>
-                    <span class="close"><i class="fa fa-angle-right"></i> </span>
+                    <span class="close"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg> </span>
                 </div>
             </div>
             <div class="line">

@@ -11,17 +11,13 @@
     width: 100%;
     height: 128/100rem;
     padding-top: 63/100rem;
-    //line-height: 128/100rem;
     color: #ffffff;
-
     font-size: 38/100rem;
     background-color: @periodColor;
-
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 999;
-
+    z-index: 900;
     text-align: center;
   }
   //日历部分
@@ -29,7 +25,6 @@
     width: 100%;
     background-color: #EEEEEE;
     margin: 0 auto;
-
     .yearsAndMonths {
       width: 100%;
       height: 50/100rem;
@@ -109,7 +104,6 @@
   //对应颜色
   .prompt {
     width: 100%;
-    height: 110/100rem;
     padding-right: 40/100rem;
     margin-top: 2/100rem;
     margin-bottom: 10/100rem;
@@ -142,6 +136,13 @@
       }
     }
   }
+  //图标
+  .icon {
+    width: 1.5em; height: 1.5em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+  }
   //操作列表
   .operation {
     ul {
@@ -150,12 +151,11 @@
         line-height: 106/100rem;
         border-bottom: 1/100rem solid #E1E1E1;
         padding-right: 24/100rem;
-        i {
-          font-size: 42/100rem;
-          color: #FF8697;
-        }
         span {
           font-size: 38/100rem;
+        }
+        svg {
+          color: #FF4F73;
         }
         &:first-child {
           padding-left: 25/100rem;
@@ -186,7 +186,16 @@
             }
 
           }
-
+        }
+        ul {
+          list-style:none;
+          float: left;
+          li{
+            svg {
+              color: #c0c0c0;
+            }
+            float: left;
+          }
         }
         &:last-child {
           border-bottom: none;
@@ -196,7 +205,114 @@
         }
       }
     }
+  }
+  //数据初始
+  .initCover {
+    display: none;
+    width: 100%;
+    position: fixed;
+    top: 128/100rem;
+    height: 100%;
+    background-color: #E1E1E1;
+    z-index: 999;
+    overflow: auto;
+    overflow-y: scroll;
+    ul {
+      p {
+        margin-top: 20px;
+        font-size: 30/100rem;
+        color: #666666;
+      }
+      li {
+        background-color: #ffffff;
+        height: 106/100rem;
+        line-height: 106/100rem;
+        border-bottom: 1/100rem solid #E1E1E1;
+        padding-right: 24/100rem;
+        span {
+          font-size: 38/100rem;
+        }
+        svg {
+          color: #FF4F73;
+        }
+        ul {
+          list-style:none;
+          float: left;
+          li{
+            svg {
+              color: #c0c0c0;
+            }
+            float: left;
+          }
+        }
+        &:last-child {
+          margin-top: 30px;
+          border-bottom: none;
+          text-align: center;
+          span {
+            color: #FF8697;
+          }
+        }
+      }
+    }
+  }
+  .init_calendar{
+    padding-top: 50px;
+    .yearsAndMonths {
+      width: 100%;
+      height: 50/100rem;
+      line-height: 50/100rem;
+      color: @periodColor;
+      text-align: center;
+      background-color: #fff;
+      padding: 0 30/100rem;
+      a {
+        color: @periodColor;
+        i {
+          font-size: 38/100rem;
+        }
+      }
+    }
+    //周
+    .weeks {
+      width: 100%;
+      height: 38/100rem;
+      font-size: 24/100rem;
+      background-color: #fff;
+      margin: 0 auto;
 
+      li {
+        width: 102/100rem;
+        height: 38/100rem;
+        line-height: 38/100rem;
+        float: right;
+        text-align: left;
+        &:first-child, &:last-child {
+          color: #FF98AB;
+        }
+      }
+    }
+    //日期
+    .init_days {
+      width: 100%;
+      padding-left: 4/100rem;
+      padding-right: 2/100rem;
+      padding-bottom: 4/100rem;
+      font-size: 24/100rem;
+      margin: 0 auto;
+      li {
+        width: 102/100rem;
+        height: 102/100rem;
+        background-color: #ffffff;
+        border-radius: 4/100rem;
+        float: right;
+        margin-right: 4/100rem;
+        margin-top: 4/100rem;
+        padding: 12/100rem;
+        color: #9A9A9A;
+      }
+
+    }
   }
   //遮挡层1,2,3
   .cover {
@@ -207,6 +323,7 @@
     top: 0;
     display: none;
     font-size: 36/100rem;
+    z-index: 999;
 
     .modelBox {
       width: 710/100rem;
@@ -301,16 +418,55 @@
         border-right: 1/100rem solid #EBEBEB;
       }
       button {
+        position: absolute;
         width: 150/100rem;
         height: 66/100rem;
         color: #ffffff;
         border: none;
         border-radius: 8/100rem;
-        margin-right: 120/100rem;
         margin-top: 65/100rem;
-
         &.yes{
+          right: 120/100rem;
           background-color: #38D2EC;
+        }
+        &.close{
+          left: 120/100rem;
+          background-color: #c0c0c0;
+        }
+      }
+    }
+    .calendarBox{
+      width: 100%;
+      height: 900/100rem;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      color: #444444;
+      h6 {
+        height: 56/100rem;
+        span {
+          float: left;
+          i {
+            color: @periodColor;
+            font-size: 40/100rem;
+          }
+        }
+      }
+      button {
+        position: absolute;
+        width: 150/100rem;
+        height: 66/100rem;
+        color: #ffffff;
+        border: none;
+        border-radius: 8/100rem;
+        margin-top: 65/100rem;
+        &.yes{
+          right: 120/100rem;
+          background-color: #38D2EC;
+        }
+        &.close{
+          left: 120/100rem;
+          background-color: #c0c0c0;
         }
       }
     }
@@ -323,23 +479,23 @@
     top: 128/100rem;
     height: 100%;
     background-color: #ffffff;
-    z-index: 1000;
+    z-index: 999;
     overflow: auto;
     overflow-y: scroll;
     &::-webkit-scrollbar {
       display: none;
     }
     .close_box {
-      height: 128/100rem;
+      height: 100/100rem;
       position: fixed;
-      //position: absolute;
-      //top: -65/100rem;
-      top: 63/100rem;
-      //top: 0;
-      font-size: 44/100rem;
+      top: 60/100rem;
+      font-size: 40/100rem;
       right: 20/100rem;
-      color: #ffffff;
-      z-index: 100000;
+      span {
+        svg {
+          color: #38D2EC;
+        }
+      }
     }
     .line {
       margin-top: 37/100rem;
@@ -359,7 +515,7 @@
             height: 28/100rem;
             border-radius: 50%;
             border: 1px solid #CCC4C2;
-            background-color: #000000;
+            background-color: @ovulation;
             z-index: 2;
             position: absolute;
             left: 201/100rem;
@@ -378,7 +534,7 @@
             background-color: @EasyPregnancy;
           }
           &.physiology {
-
+            background-color: @physiology;
           }
           >span {
             //width: 10px;

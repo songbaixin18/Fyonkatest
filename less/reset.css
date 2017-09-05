@@ -9,6 +9,8 @@
 html {
   height: 100%;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: auto;
 }
 body {
   height: 100%;
