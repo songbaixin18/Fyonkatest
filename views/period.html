@@ -59,10 +59,10 @@
 
         <div class="operation">
             <ul>
-                <li id="toDayOnOff_li"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> الحيض </span><a href="javascript:" id="toDayOnOff" class="on_off"><span class="off"></span></a></li>
-                <li id="trigger_duration"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> مدة  الحيض </span></li>
-                <li id="trigger_cycle"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> دورة الحيض </span></li>
-                <li id="dysmenorrhea"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span>  عسر الطمث  </span>
+                <li id="toDayOnOff_li"><img class="icon" src="../icon/start.png" alt="start"><span> الحيض </span><a href="javascript:" id="toDayOnOff" class="on_off"><span class="off"></span></a></li>
+                <li id="trigger_duration"><img class="icon" src="../icon/end.png" alt="end"><span> مدة  الحيض </span></li>
+                <li id="trigger_cycle"><img class="icon" src="../icon/end.png" alt="end"><span> دورة الحيض </span></li>
+                <li id="dysmenorrhea"><img class="icon" src="../icon/dysmenorrhea.png" alt="dys"><span>  عسر الطمث  </span>
                     <ul>
                         <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
                         <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
@@ -71,7 +71,7 @@
                         <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
                     </ul>
                 </li>
-                <li id="flow"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span>  تدفق  </span>
+                <li id="flow"><img class="icon" src="../icon/flow.png" alt="flow"><span>  تدفق  </span>
                     <ul>
                         <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
                         <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
@@ -91,11 +91,11 @@
             <div>
                 <ul>
                     <p>您的月经大概持续几天？</p>
-                    <li id="init_duration"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> 经期长度 </span></li>
+                    <li id="init_duration"><span> 经期长度 </span></li>
                     <p>两次月经开始日大概间隔多久？</p>
-                    <li id="init_cycle"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> 周期长度 </span></li>
+                    <li id="init_cycle"><span> 周期长度 </span></li>
                     <p>最近一次月经大概是哪天来的？</p>
-                    <li id="init_lastTime"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> 最近一次月经 </span></li>
+                    <li id="init_lastTime"><span> 最近一次月经 </span></li>
                     <li id="init_enter"><span> 开始使用 </span></li>
                 </ul>
             </div>
@@ -104,20 +104,36 @@
         <!--遮挡层1-->
         <div class="cover" id="selected">
             <div class="modelBox">
-               <h6> تعديل  سجل  في فترة الحيض <span id="close" class="close"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg></span></h6>
+               <h6> تعديل  سجل  في فترة الحيض <img id = "close" class="icon-close" src="../icon/close.png" alt="close"></h6>
                 <span id="that_day"></span>
                 <ul>
-                    <li class="modelBox_li1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> الحيض </span><a href="javascript:" class="on_off" id="selected_startOnOff" ><span class=" off "></span></a></li>
-                    <li class="modelBox_li1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> الحيض </span><a href="javascript:" class="on_off" id="selected_endOnOff" ><span class=" off "></span></a></li>
-                    <li class="modelBox_li1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> مدة  الحيض </span></li>
-                    <li class="modelBox_li1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-addition"></use></svg><span> مدة  الحيض </span></li>
+                    <li class="modelBox_li1"><img class="icon" src="../icon/start.png" alt="start"><span> الحيض </span><a href="javascript:" class="on_off" id="selected_startOnOff" ><span class=" off "></span></a></li>
+                    <li class="modelBox_li1"><img class="icon" src="../icon/end.png" alt="end"><span> الحيض </span><a href="javascript:" class="on_off" id="selected_endOnOff" ><span class=" off "></span></a></li>
+                    <li id="cover_dysmenorrhea" class="modelBox_li1"><img class="icon" src="../icon/dysmenorrhea.png" alt="dys"><span> مدة  الحيض </span>
+                        <ul>
+                            <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
+                            <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
+                            <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
+                            <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
+                            <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-emoji"></use></svg></li>
+                        </ul>
+                    </li>
+                    <li id="cover_flow" class="modelBox_li1"><img class="icon" src="../icon/flow.png" alt="flow"><span> مدة  الحيض </span>
+                        <ul>
+                            <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
+                            <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
+                            <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
+                            <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
+                            <li><svg class="icon" aria-hidden="true"><use xlink:href="#icon-flashlight"></use></svg></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
         <!-- 遮挡层2-->
         <div class="cover" id="duration">
             <div class="modelBox">
-                <h6> الرجاء اختيار  فترات  طويلة <span class="close"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg></span></h6>
+                <h6> الرجاء اختيار  فترات  طويلة <img class="icon-close" src="../icon/close.png" alt="close"></h6>
 
                     <div class="dates">
                         <ul class="modelBox_ul2" id="modelBox_ul2">
@@ -223,17 +239,16 @@
                             <li class="modelBox_li2">100 يوم</li>
                         </ul>
                     </div>
-                <!--<form >-->
                 <div>
                     <button class="yes" id="yes_duration">确定</button>
                     <button class="close">取消</button>
-                <!--</form>--></div>
+                </div>
             </div>
         </div>
         <!-- 遮挡层3-->
         <div class="cover" id="cycle">
             <div class="modelBox">
-                <h6> الرجاء اختيار  فترات  طويلة <span class="close"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg></span></h6>
+                <h6> الرجاء اختيار  فترات  طويلة <img class="icon-close" src="../icon/close.png" alt="close"></h6>
                 <div class="dates">
                     <ul class="modelBox_ul3">
                         <li class="modelBox_li2">يوم </li>
@@ -613,7 +628,7 @@
         <!-- 日期选择-->
         <div class="cover init_calendar">
             <div class="calendarBox">
-                <h6> الرجاء اختيار  فترات  طويلة <span class="close"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg></span></h6>
+                <h6> الرجاء اختيار  فترات  طويلة <img class="icon-close" src="../icon/close.png" alt="close"></h6>
                 <div class="yearsAndMonths clearfix">
                     <a href="javascript:" class="init_today" id="init_today"><span>今天</span></a>
                     <a href="javascript:" class="f_left" id="init_prev">
@@ -648,11 +663,10 @@
         <div class="explain">
             <div class="close_box">
                 <div>
-                    <span class="close"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close"></use></svg> </span>
+                    <img class="icon-close" src="../icon/close.png" alt="close"> </span>
                 </div>
             </div>
             <div class="line">
-
                 <ul class="line_ul">
                     <li class="SafePeriod"> <span > فترة الأمان </span></li>
                     <li class="ovulation"><span > فترة التبويض </span></li>

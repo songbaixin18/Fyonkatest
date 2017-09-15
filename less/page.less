@@ -138,10 +138,16 @@
   }
   //图标
   .icon {
-    width: 1.5em; height: 1.5em;
-    vertical-align: -0.15em;
-    fill: currentColor;
+    width: 50/100rem;
+    height: 50/100rem;
+    vertical-align: -10/100rem;
     overflow: hidden;
+  }
+  .icon-close{
+    float: left;
+    width: 50/100rem;
+    height: 50/100rem;
+    vertical-align: -10/100rem;
   }
   //操作列表
   .operation {
@@ -153,9 +159,6 @@
         padding-right: 24/100rem;
         span {
           font-size: 38/100rem;
-        }
-        svg {
-          color: #FF4F73;
         }
         &:first-child {
           padding-left: 25/100rem;
@@ -219,101 +222,31 @@
     overflow-y: scroll;
     ul {
       p {
-        margin-top: 20px;
+        margin-top: 50/100rem;
         font-size: 30/100rem;
         color: #666666;
       }
       li {
+        color: #3d444c;
         background-color: #ffffff;
-        height: 106/100rem;
-        line-height: 106/100rem;
-        border-bottom: 1/100rem solid #E1E1E1;
-        padding-right: 24/100rem;
+        height: 110/100rem;
+        line-height: 110/100rem;
+        padding-right: 40/100rem;
         span {
           font-size: 38/100rem;
         }
-        svg {
-          color: #FF4F73;
-        }
-        ul {
-          list-style:none;
-          float: left;
-          li{
-            svg {
-              color: #c0c0c0;
-            }
-            float: left;
-          }
-        }
         &:last-child {
-          margin-top: 30px;
-          border-bottom: none;
+          margin-top: 60/100rem;
           text-align: center;
+          background-color: #FF4F73;
           span {
-            color: #FF8697;
+            color: #ffffff;
           }
         }
       }
     }
   }
-  .init_calendar{
-    padding-top: 50px;
-    .yearsAndMonths {
-      width: 100%;
-      height: 50/100rem;
-      line-height: 50/100rem;
-      color: @periodColor;
-      text-align: center;
-      background-color: #fff;
-      padding: 0 30/100rem;
-      a {
-        color: @periodColor;
-        i {
-          font-size: 38/100rem;
-        }
-      }
-    }
-    //周
-    .weeks {
-      width: 100%;
-      height: 38/100rem;
-      font-size: 24/100rem;
-      background-color: #fff;
-      margin: 0 auto;
 
-      li {
-        width: 102/100rem;
-        height: 38/100rem;
-        line-height: 38/100rem;
-        float: right;
-        text-align: left;
-        &:first-child, &:last-child {
-          color: #FF98AB;
-        }
-      }
-    }
-    //日期
-    .init_days {
-      width: 100%;
-      padding-left: 4/100rem;
-      padding-right: 2/100rem;
-      padding-bottom: 4/100rem;
-      font-size: 24/100rem;
-      margin: 0 auto;
-      li {
-        width: 102/100rem;
-        height: 102/100rem;
-        background-color: #ffffff;
-        border-radius: 4/100rem;
-        float: right;
-        margin-right: 4/100rem;
-        margin-top: 4/100rem;
-        padding: 12/100rem;
-        color: #9A9A9A;
-      }
-
-    }
-  }
   //遮挡层1,2,3
   .cover {
     width: 100%;
@@ -332,7 +265,10 @@
       margin: 273/100rem auto;
       padding: 30/100rem;
       color: #444444;
-
+      >span{
+        color: #666666;
+        font-size: 30/100rem;
+      }
       .dates{
         height: 200/100rem;
         overflow: auto;
@@ -348,19 +284,8 @@
       }
       h6 {
         height: 56/100rem;
-        span {
-          float: left;
-          i {
-            color: @periodColor;
-            font-size: 40/100rem;
-          }
-        }
-      }
-      >span {
-        height: 50/100rem;
-        font-size: 30/100rem;
-        color: #9A9A9A;
-        display: block;
+        color: @periodColor;
+        font-size: 35/100rem;
       }
       ul,ul.modelBox_ul2,ul.modelBox_ul3{
         li.modelBox_li1 {
@@ -398,6 +323,16 @@
               }
             }
           }
+          ul {
+            list-style:none;
+            float: left;
+            li{
+              svg {
+                color: #c0c0c0;
+              }
+              float: left;
+            }
+          }
         }
         li.modelBox_li2 {
           width: 92/100rem;
@@ -417,23 +352,6 @@
         border-left: 1/100rem solid #EBEBEB;
         border-right: 1/100rem solid #EBEBEB;
       }
-      button {
-        position: absolute;
-        width: 150/100rem;
-        height: 66/100rem;
-        color: #ffffff;
-        border: none;
-        border-radius: 8/100rem;
-        margin-top: 65/100rem;
-        &.yes{
-          right: 120/100rem;
-          background-color: #38D2EC;
-        }
-        &.close{
-          left: 120/100rem;
-          background-color: #c0c0c0;
-        }
-      }
     }
     .calendarBox{
       width: 100%;
@@ -444,14 +362,88 @@
       color: #444444;
       h6 {
         height: 56/100rem;
-        span {
-          float: left;
+        color: @periodColor;
+        font-size: 35/100rem;
+      }
+    }
+    button {
+      position: absolute;
+      width: 150/100rem;
+      height: 66/100rem;
+      color: #ffffff;
+      border: none;
+      border-radius: 8/100rem;
+      margin-top: 65/100rem;
+      &.yes{
+        right: 120/100rem;
+        background-color: #38D2EC;
+      }
+      &.close{
+        left: 120/100rem;
+        background-color: #ccc4c2;
+      }
+    }
+  }
+  .init_calendar{
+    padding-top: 50px;
+    .calendarBox{
+      height: 10rem;
+      background-color: #fff;
+      .yearsAndMonths {
+        width: 100%;
+        height: 50/100rem;
+        line-height: 50/100rem;
+        color: @periodColor;
+        text-align: center;
+        background-color: #fff;
+        padding: 0 30/100rem;
+        a {
+          color: @periodColor;
           i {
-            color: @periodColor;
-            font-size: 40/100rem;
+            font-size: 38/100rem;
           }
         }
       }
+      //周
+      .weeks {
+        width: 100%;
+        height: 38/100rem;
+        font-size: 24/100rem;
+        background-color: #fff;
+        margin: 0 auto;
+
+        li {
+          width: 102/100rem;
+          height: 38/100rem;
+          line-height: 38/100rem;
+          float: right;
+          text-align: left;
+          &:first-child, &:last-child {
+            color: #FF98AB;
+          }
+        }
+      }
+      //日期
+      .init_days {
+        width: 100%;
+        padding-left: 4/100rem;
+        padding-right: 2/100rem;
+        padding-bottom: 4/100rem;
+        font-size: 24/100rem;
+        margin: 0 auto;
+        li {
+          width: 102/100rem;
+          height: 102/100rem;
+          background-color: #ffffff;
+          border-radius: 4/100rem;
+          float: right;
+          margin-right: 4/100rem;
+          margin-top: 4/100rem;
+          padding: 12/100rem;
+          color: #9A9A9A;
+        }
+      }
+
       button {
         position: absolute;
         width: 150/100rem;
@@ -466,7 +458,7 @@
         }
         &.close{
           left: 120/100rem;
-          background-color: #c0c0c0;
+          background-color: #ccc4c2;
         }
       }
     }
@@ -502,7 +494,7 @@
       padding-top: 56/100rem;
       height: 126/100rem;
       ul.line_ul {
-          width: 620/100rem;
+        width: 620/100rem;
         margin: 0 auto;
         position: relative;
         li {
@@ -520,7 +512,7 @@
             position: absolute;
             left: 201/100rem;
             top: -11/100rem;
-            span {
+            &span {
               bottom: 0;
               display:block;
               top :-56/100rem;

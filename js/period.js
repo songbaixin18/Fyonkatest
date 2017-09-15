@@ -1,6 +1,3 @@
-/**
- * Created by CD on 2017/5/24.
- */
 (function (window) {
     var apiUrl = 'http://107.150.100.209:8080/game_web/';
     // 获取用户ID
@@ -26,7 +23,6 @@
             type: 'POST',
             dataType: 'json',
             success: function(data) {
-                console.log(data);
             },
             error: function (msg) {
                 console.log(msg);
@@ -42,7 +38,6 @@
             type: 'POST',
             dataType: 'json',
             success: function(data) {
-                console.log(data);
             },
             error: function (msg) {
                 console.log(msg);
@@ -50,19 +45,26 @@
         });
     }
     // 获取用户痛经流量数据
-    var dysmenorrhea_data = null;
-    var flow_data = null;
+    var dysmenorrhea_data = 0;
+    var flow_data = 0;
+    var cover_dysmenorrhea_data = 0;
+    var cover_flow_data = 0;
     function getDealData(unionId,currentMonth) {
         $.ajax({
             async: false,
-            url: apiUrl+'/period/get_period_info?unionId='+unionId+'&currentMonth='+currentMonth,
-            //url:'/period/get_period_info?unionId=1&currentMonth=2017-08-13',
+            url: apiUrl+'/period/get_period_data?unionId='+unionId+'&day='+currentMonth,
+            //url:'/period/get_period_data?unionId=1&day=2017-08-13',
             type: 'POST',
             dataType: 'json',
             success: function(data) {
-                dysmenorrhea_data = data.dysmenorrhea;
-                flow_data = data.flow;
-                console.log(dysmenorrhea_data+";"+flow_data);
+                if(data !== null){
+                    if(FormatDate(new Date()) === currentMonth){
+                        dysmenorrhea_data = data.dysmenorrhea;
+                        flow_data = data.flow;
+                    }
+                    cover_dysmenorrhea_data = data.dysmenorrhea;
+                    cover_flow_data = data.flow;
+                }
             },
             error:function(data) {
                 alert('获取用户数据出错');
@@ -86,8 +88,6 @@
                 start_labeled = AddMonths(parseDate(currentMonth), -2);
                 end_labeled = AddMonths(parseDate(currentMonth), 2);
                 periodInfo_labeled = data.recordBeans;
-                console.log(data);
-                console.log(periodInfo_labeled);
             },
             error:function(data) {
                 alert('获取用户数据出错');
@@ -114,15 +114,13 @@
                     periodInfo_labeled.unshift.apply( periodInfo_labeled, data.recordBeans );
                     start_labeled = AddMonths(parseDate(currentMonth),-2)
                 }
-                console.log(data);
-                console.log(periodInfo_labeled);
             },
             error:function(data) {
                 alert('获取用户数据出错');
             }
         });
     }
-    // 提交经期常规数据
+    // 初始化经期常规数据
     function inPeriodDataRule(unionId,periodism,duration,lastDay) {
         $.ajax({
             async: false,
@@ -131,14 +129,27 @@
             type: 'POST',
             dataType: 'json',
             success: function(data) {
-                console.log(data);
             },
             error: function (msg) {
                 console.log(msg);
             }
         });
     }
-
+    // 更新经期常规数据
+    function updataPeriodDataRule(unionId,periodism,duration) {
+        $.ajax({
+            async: false,
+            url: apiUrl+'/period/save_period_info?unionId='+unionId+'&periodism='+periodism+'&duration='+duration,
+            //url:'/period/save_period_info?unionId=1&periodism=28&duration=4,
+            type: 'POST',
+            dataType: 'json',
+            success: function(data) {
+            },
+            error: function (msg) {
+                console.log(msg);
+            }
+        });
+    }
     window.onload = function () {
         // 日期计算相关函数
         var F = {
@@ -169,7 +180,8 @@
         var today = document.querySelector('#today');
         var prev = document.querySelector('#prev');
         var next = document.querySelector('#next');
-        var calendar = document.querySelector('.calendar');
+        var years = document.querySelector('#years');
+        var months = document.querySelector('#months');
         var triggers = triggerCover.children;
         // 日期选择
         var init_triggerCover = document.querySelector('#init_triggerCover');
@@ -178,10 +190,9 @@
         var init_prev = document.querySelector('#init_prev');
         var init_next = document.querySelector('#init_next');
         var init_calendar = document.querySelector('.init_calendar');
+        var init_years = document.querySelector('#init_years');
+        var init_months = document.querySelector('#init_months');
         var init_triggers = init_triggerCover.children;
-        // 页面中的年月标签
-        var years = document.querySelector('#years');
-        var months = document.querySelector('#months');
         // 操作列表开关
         var toDayOnOff = document.querySelector('#toDayOnOff');
         // 遮挡层1
@@ -190,6 +201,8 @@
         var selected = document.getElementById('selected');
         var selectedStartOnOff = document.querySelector('#selected_startOnOff');
         var selectedEndOnOff = document.querySelector('#selected_endOnOff');
+        var cover_dysmenorrhea = document.querySelector('#cover_dysmenorrhea');
+        var cover_flow = document.querySelector('#cover_flow');
         // 操作列表
         var toDayOnOff_li = document.querySelector('#toDayOnOff_li');
         var dysmenorrhea = document.querySelector('#dysmenorrhea');
@@ -214,6 +227,7 @@
         var init_enter = document.querySelector('#init_enter');
         var init_lastTime = document.querySelector('#init_lastTime');
         // 关闭遮挡层
+        var icon_close = document.querySelectorAll('.icon-close');
         var close = document.querySelectorAll('.close');
         var date = new Date();
         var year = date.getFullYear();
@@ -221,6 +235,8 @@
 
         years.innerText = year + '年';
         months.innerText = month + '月';
+        init_years.innerText = year + '年';
+        init_months.innerText = month + '月';
 
         // 固定数据
         // 排卵日与经期差值
@@ -229,9 +245,9 @@
         var easyPregnancyDayEnd = 10;
         var easyPregnancyDayStart = 19;
         // 月经最早开始时间
-        var lastDate = null;
+        var firstDay = null;
         // 月经最后开始时间
-        var lastPeriodDateStart = null;
+        var lastDay = null;
         // 经期周期
         var dataCycle;
         // 经期时长
@@ -239,14 +255,63 @@
 
         // 变量重赋值
         function resValue() {
-            lastDate = periodInfo.lastDay;
-            lastPeriodDateStart = periodInfo.lastTime;
+            firstDay = periodInfo.firstDay;
+            lastDay = periodInfo.lastDay;
             dataCycle = periodInfo.periodism;
             dataTime = periodInfo.duration - 1;
         }
         getUnionId('virtualDevice2');
         var unionId = unionIdInfo.unionId;
+        // 获取日期对应的记录ID
+        function getRecordId(date) {
+            var recordid = 0;
+            for (var i = 0; i < periodInfo_labeled.length; i++) {
+                if (periodInfo_labeled[i].endDay === '') {
+                    if (parseDate(periodInfo_labeled[i].startDay) <= date) {
+                        recordid = periodInfo_labeled[i].recordId;
+                        return recordid;
+                    }
+                }
+                if (parseDate(periodInfo_labeled[i].startDay) <= date && AddDays(parseDate(periodInfo_labeled[i].endDay), 1) > date) {
+                    recordid = periodInfo_labeled[i].recordId;
+                    return recordid;
+                }
+            }
+            return recordid;
+        }
 
+        // 获取日期对应的记录Index
+        function getRecordIndex(date) {
+            var i = 0;
+            for (i = 0; i < periodInfo_labeled.length; i++) {
+                if (periodInfo_labeled[i].endDay === '') {
+                    if (parseDate(periodInfo_labeled[i].startDay) <= date) {
+                        return i;
+                    }
+                }
+                if (parseDate(periodInfo_labeled[i].startDay) <= date && AddDays(parseDate(periodInfo_labeled[i].endDay), 1) > date) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        // 获取日期之前最近的记录ID
+        function getLastRecordId(date) {
+            var recordid = 0;
+            var temp = 0;
+            for (var i = 0; i < periodInfo_labeled.length; i++) {
+                if (parseDate(periodInfo_labeled[i].startDay) <= date) {
+                    temp = date - parseDate(periodInfo_labeled[i].startDay);
+                    recordid = periodInfo_labeled[i].recordId;
+                    if (date - parseDate(periodInfo_labeled[i].startDay) < temp) {
+                        temp = date - parseDate(periodInfo_labeled[i].startDay);
+                        recordid = periodInfo_labeled[i].recordId;
+                    }
+                }
+            }
+            return recordid;
+        }
         // 初始数据
         if (unionIdInfo.flag === 0) {
             // 初始数据
@@ -295,55 +360,98 @@
                 init_calendar.style.display = 'block';
             });
             var init_lastTime_data;
-            init_days.innerHTML = '';
-            var firstDayOfWeek = F.getWeekInMonth(year, month);
-            for (var i = 0; i < firstDayOfWeek; i++) {
-                var li_none = document.createElement('li');
-                init_days.appendChild(li_none)
-            }
-            var daysInMonth = F.getDaysInMonth(year, month);
-            for (var i = 0; i < daysInMonth; i++) {
-                var li_block = document.createElement('li');
-                li_block.innerText = i + 1;
-                init_days.appendChild(li_block);
-            }
-            var lastDayOfWeek = F.getLastWeekInMonth(year, month);
-            for (var i = 0; i < (6 - lastDayOfWeek); i++) {
-                var li_none = document.createElement('li');
-                init_days.appendChild(li_none)
-            }
-            for (var i = 1; i <= F.getDaysInMonth(year, month); i++) {
-                if (parseDate(year + "/" + month + "/" + i) <= new Date()) {
-                    (function (arg) {
-                        init_triggers[arg + firstDayOfWeek - 1].addEventListener('click', triggers_click);
-                        function triggers_click() {
-                            for (var j = 1; j <= F.getDaysInMonth(year, month); j++) {
-                                init_triggers[j + firstDayOfWeek - 1].style.border = 'none';
-                            }
-                            this.style.border = '2px solid #FF4F73';
-                            yes_calendar.addEventListener('click',yes_calendar_click);
-                            function yes_calendar_click() {
-                                init_lastTime_data = year + '-' + month + '-' + arg;
-                                this.parentNode.parentNode.parentNode.style.display = 'none';
-                                yes_calendar.removeEventListener('click',yes_calendar_click);
-                            }
-                        }
-                    })(i);
+            function init_render() {
+                init_days.innerHTML = '';
+                var firstDayOfWeek = F.getWeekInMonth(year, month);
+                for (var i = 0; i < firstDayOfWeek; i++) {
+                    var li_none = document.createElement('li');
+                    init_days.appendChild(li_none)
                 }
+                var daysInMonth = F.getDaysInMonth(year, month);
+                for (var i = 0; i < daysInMonth; i++) {
+                    var li_block = document.createElement('li');
+                    li_block.innerText = i + 1;
+                    init_days.appendChild(li_block);
+                }
+                var lastDayOfWeek = F.getLastWeekInMonth(year, month);
+                for (var i = 0; i < (6 - lastDayOfWeek); i++) {
+                    var li_none = document.createElement('li');
+                    init_days.appendChild(li_none)
+                }
+                for (var i = 1; i <= F.getDaysInMonth(year, month); i++) {
+                    if (parseDate(year + "/" + month + "/" + i) <= new Date()) {
+                        (function (arg) {
+                            init_triggers[arg + firstDayOfWeek - 1].addEventListener('click', triggers_click);
+                            function triggers_click() {
+                                for (var j = 1; j <= F.getDaysInMonth(year, month); j++) {
+                                    init_triggers[j + firstDayOfWeek - 1].style.border = 'none';
+                                }
+                                this.style.border = '2px solid #FF4F73';
+                                yes_calendar.addEventListener('click',yes_calendar_click);
+                                function yes_calendar_click() {
+                                    init_lastTime_data = year + '-' + month + '-' + arg;
+                                    this.parentNode.parentNode.parentNode.style.display = 'none';
+                                    yes_calendar.removeEventListener('click',yes_calendar_click);
+                                }
+                            }
+                        })(i);
+                    }
+                }
+            }
+            init_render();
+            //今天
+            init_today.addEventListener('click', init_today_date);
+            function init_today_date() {
+                date = new Date();
+                year = date.getFullYear();
+                month = date.getMonth() + 1;
+                var day = date.getDate();
+                years.innerText = year + '年';
+                var firstDayOfWeek = F.getWeekInMonth(year, month);
+                init_render();
+                for (var j = 1; j <= F.getDaysInMonth(year, month); j++) {
+                    init_triggers[j + firstDayOfWeek - 1].style.border = 'none';
+                }
+                init_triggers[day + firstDayOfWeek - 1].style.border = '2px solid #FF4F73';
+            }
+            //上个月
+            init_prev.addEventListener('click', init_prev_month);
+
+            function init_prev_month() {
+                month = month - 1;
+                if (month < 1) {
+                    year = year - 1;
+                    month = 12;
+                }
+                init_years.innerText = year + '年';
+                init_months.innerText = month + '月';
+                init_render();
+            }
+            //下个月
+            init_next.addEventListener('click', init_next_month);
+            function init_next_month() {
+                month = month + 1;
+                if (month > 12) {
+                    year = year + 1;
+                    month = 1;
+                }
+                init_years.innerText = year + '年';
+                init_months.innerText = month + '月';
+                init_render();
             }
             init_enter.addEventListener('click',yes_init_click);
             function yes_init_click() {
                 if(typeof(init_lastTime_data&&init_cycle_data&&init_duration_data) === 'undefined'){
                     alert('请完整填写数据');
                 }else{
-                    //alert(unionId+"\n"+ init_cycle_data+"\n"+ init_duration_data+"\n"+ init_lastTime_data)
                     inPeriodDataRule(unionId, init_cycle_data, init_duration_data, FormatDate(parseDate(init_lastTime_data)));
                     inPeriodData(0, unionId, 1, 1, FormatDate(parseDate(init_lastTime_data)));
-                    if (AddDays(parseDate(year + "/" + month + "/" + arg), init_duration_data) < new Date()) {
+                    if (AddDays(parseDate(init_lastTime_data), init_duration_data) < new Date()) {
                         getPeriodData(unionId, FormatDate(parseDate(init_lastTime_data)));
-                        inPeriodData(getRecordId(parseDate(init_lastTime_data)), unionId, 2, 1, FormatDate(AddDays(parseDate(year + "/" + month + "/" + arg), init_duration_data)));
+                        inPeriodData(getRecordId(parseDate(init_lastTime_data)), unionId, 2, 1, FormatDate(AddDays(parseDate(init_lastTime_data), init_duration_data - 1)));
                     }
-                    yes_duration.removeEventListener('click', yes_duration_click);
+                    init_enter.removeEventListener('click', yes_init_click);
+                    location.reload(true);
                 }
 
             }
@@ -354,59 +462,14 @@
                     this.parentNode.parentNode.parentNode.style.display = 'none';
                 })
             }
+            for (var k = 0; k < icon_close.length; k++) {
+                icon_close[k].addEventListener('click', function () {
+                    this.parentNode.parentNode.parentNode.style.display = 'none';
+                })
+            }
         } else {
             getPeriodData(unionId, FormatDate(new Date()));
             resValue();
-            // 获取日期对应的记录ID
-            function getRecordId(date) {
-                var recordid = 0;
-                for (var i = 0; i < periodInfo_labeled.length; i++) {
-                    if (periodInfo_labeled[i].endDay === '1997-01-01') {
-                        if (parseDate(periodInfo_labeled[i].startDay) <= date) {
-                            recordid = periodInfo_labeled[i].recordId;
-                            return recordid;
-                        }
-                    }
-                    if (parseDate(periodInfo_labeled[i].startDay) <= date && AddDays(parseDate(periodInfo_labeled[i].endDay), 1) > date) {
-                        recordid = periodInfo_labeled[i].recordId;
-                        return recordid;
-                    }
-                }
-                return recordid;
-            }
-
-            // 获取日期对应的记录Index
-            function getRecordIndex(date) {
-                var i = 0;
-                for (i = 0; i < periodInfo_labeled.length; i++) {
-                    if (periodInfo_labeled[i].endDay === '1997-01-01') {
-                        if (parseDate(periodInfo_labeled[i].startDay) <= date) {
-                            return i;
-                        }
-                    }
-                    if (parseDate(periodInfo_labeled[i].startDay) <= date && AddDays(parseDate(periodInfo_labeled[i].endDay), 1) > date) {
-                        return i;
-                    }
-                }
-                return -1;
-            }
-
-            // 获取日期之前最近的记录ID
-            function getLastRecordId(date) {
-                var recordid = 0;
-                var temp = 0;
-                for (var i = 0; i < periodInfo_labeled.length; i++) {
-                    if (parseDate(periodInfo_labeled[i].startDay) <= date) {
-                        temp = date - parseDate(periodInfo_labeled[i].startDay);
-                        recordid = periodInfo_labeled[i].recordId;
-                        if (date - parseDate(periodInfo_labeled[i].startDay) < temp) {
-                            temp = date - parseDate(periodInfo_labeled[i].startDay);
-                            recordid = periodInfo_labeled[i].recordId;
-                        }
-                    }
-                }
-                return recordid;
-            }
 
             // 加载日历
             function render() {
@@ -429,58 +492,58 @@
                 }
                 var thisMonthMaxDate = F.getLastDayInMonth(year, month);
                 AddDays(thisMonthMaxDate, dataCycle);
-                var lastPeriodDateStartTemp;
+                var lastDayTemp;
                 // 预测经期处理显示
                 // 预测安全期
                 for (var i = 1; i <= F.getDaysInMonth(year, month); i++) {
-                    if (parseDate(year + "/" + month + "/" + i) >= parseDate(lastPeriodDateStart)) {
+                    if (parseDate(year + "/" + month + "/" + i) >= parseDate(lastDay)) {
                         triggers[i + firstDayOfWeek - 1].className = 'SafePeriod';
                     }
                 }
                 // 预测易孕期
-                for (lastPeriodDateStartTemp = parseDate(lastPeriodDateStart); lastPeriodDateStartTemp <= thisMonthMaxDate; AddDays(lastPeriodDateStartTemp, dataCycle)) {
-                    if (AddDays(new Date(lastPeriodDateStartTemp), easyPregnancyDayStart * -1).getMonth() + 1 === month
-                        && AddDays(new Date(lastPeriodDateStartTemp), easyPregnancyDayStart * -1).getFullYear() === year) {
-                        for (var j = AddDays(new Date(lastPeriodDateStartTemp), easyPregnancyDayStart * -1).getDate();
+                for (lastDayTemp = parseDate(lastDay); lastDayTemp <= thisMonthMaxDate; AddDays(lastDayTemp, dataCycle)) {
+                    if (AddDays(new Date(lastDayTemp), easyPregnancyDayStart * -1).getMonth() + 1 === month
+                        && AddDays(new Date(lastDayTemp), easyPregnancyDayStart * -1).getFullYear() === year) {
+                        for (var j = AddDays(new Date(lastDayTemp), easyPregnancyDayStart * -1).getDate();
                              j <= F.getDaysInMonth(year, month)
-                             && parseDate(year + "/" + month + "/" + j) <= AddDays(new Date(lastPeriodDateStartTemp), easyPregnancyDayEnd * -1);
+                             && parseDate(year + "/" + month + "/" + j) <= AddDays(new Date(lastDayTemp), easyPregnancyDayEnd * -1);
                              j++) {
                             triggers[j + firstDayOfWeek - 1].className = 'EasyPregnancy';
                         }
                     }
-                    if (AddDays(new Date(lastPeriodDateStartTemp), easyPregnancyDayEnd * -1).getMonth() + 1 === month
-                        && AddDays(new Date(lastPeriodDateStartTemp), easyPregnancyDayEnd * -1).getFullYear() === year) {
-                        for (var j = AddDays(new Date(lastPeriodDateStartTemp), easyPregnancyDayEnd * -1).getDate();
+                    if (AddDays(new Date(lastDayTemp), easyPregnancyDayEnd * -1).getMonth() + 1 === month
+                        && AddDays(new Date(lastDayTemp), easyPregnancyDayEnd * -1).getFullYear() === year) {
+                        for (var j = AddDays(new Date(lastDayTemp), easyPregnancyDayEnd * -1).getDate();
                              j >= 1
-                             && parseDate(year + "/" + month + "/" + j) >= AddDays(new Date(lastPeriodDateStartTemp), easyPregnancyDayStart * -1);
+                             && parseDate(year + "/" + month + "/" + j) >= AddDays(new Date(lastDayTemp), easyPregnancyDayStart * -1);
                              j--) {
                             triggers[j + firstDayOfWeek - 1].className = 'EasyPregnancy';
                         }
                     }
                 }
                 // 预测排卵日
-                for (lastPeriodDateStartTemp = parseDate(lastPeriodDateStart); lastPeriodDateStartTemp <= thisMonthMaxDate; AddDays(lastPeriodDateStartTemp, dataCycle)) {
-                    if (AddDays(new Date(lastPeriodDateStartTemp), ovulationDay * -1).getMonth() + 1 === month
-                        && AddDays(new Date(lastPeriodDateStartTemp), ovulationDay * -1).getFullYear() === year) {
-                        triggers[AddDays(new Date(lastPeriodDateStartTemp), ovulationDay * -1).getDate() + firstDayOfWeek - 1].className = 'ovulation';
+                for (lastDayTemp = parseDate(lastDay); lastDayTemp <= thisMonthMaxDate; AddDays(lastDayTemp, dataCycle)) {
+                    if (AddDays(new Date(lastDayTemp), ovulationDay * -1).getMonth() + 1 === month
+                        && AddDays(new Date(lastDayTemp), ovulationDay * -1).getFullYear() === year) {
+                        triggers[AddDays(new Date(lastDayTemp), ovulationDay * -1).getDate() + firstDayOfWeek - 1].className = 'ovulation';
                     }
                 }
                 // 预测经期
-                for (lastPeriodDateStartTemp = parseDate(lastPeriodDateStart); lastPeriodDateStartTemp <= thisMonthMaxDate; AddDays(lastPeriodDateStartTemp, dataCycle)) {
-                    if (new Date(lastPeriodDateStartTemp).getMonth() + 1 === month
-                        && new Date(lastPeriodDateStartTemp).getFullYear() === year) {
-                        for (var j = new Date(lastPeriodDateStartTemp).getDate();
+                for (lastDayTemp = parseDate(lastDay); lastDayTemp <= thisMonthMaxDate; AddDays(lastDayTemp, dataCycle)) {
+                    if (new Date(lastDayTemp).getMonth() + 1 === month
+                        && new Date(lastDayTemp).getFullYear() === year) {
+                        for (var j = new Date(lastDayTemp).getDate();
                              j <= F.getDaysInMonth(year, month)
-                             && parseDate(year + "/" + month + "/" + j) < AddDays(new Date(lastPeriodDateStartTemp), dataTime);
+                             && parseDate(year + "/" + month + "/" + j) < AddDays(new Date(lastDayTemp), dataTime);
                              j++) {
                             triggers[j + firstDayOfWeek - 1].className = 'PredictivePhysiological';
                         }
                     }
-                    if (AddDays(new Date(lastPeriodDateStartTemp), dataTime).getMonth() + 1 === month
-                        && AddDays(new Date(lastPeriodDateStartTemp), dataTime).getFullYear() === year) {
-                        for (var j = AddDays(new Date(lastPeriodDateStartTemp), dataTime).getDate();
+                    if (AddDays(new Date(lastDayTemp), dataTime).getMonth() + 1 === month
+                        && AddDays(new Date(lastDayTemp), dataTime).getFullYear() === year) {
+                        for (var j = AddDays(new Date(lastDayTemp), dataTime).getDate();
                              j >= 1
-                             && parseDate(year + "/" + month + "/" + j) > new Date(lastPeriodDateStartTemp)
+                             && parseDate(year + "/" + month + "/" + j) > new Date(lastDayTemp)
                             ; j--) {
                             triggers[j + firstDayOfWeek - 1].className = 'PredictivePhysiological';
                         }
@@ -512,10 +575,10 @@
                     }
                 }
                 // 安全期第二部分（最早的经期开始记录到最后的经期开始记录）
-                if (lastPeriodDateStart !== null) {
+                if (lastDay !== null) {
                     for (var i = 1; i <= F.getDaysInMonth(year, month) && triggers[i + firstDayOfWeek - 1].innerText; i++) {
-                        if (parseDate(year + "/" + month + "/" + i) < parseDate(lastPeriodDateStart)
-                            && parseDate(year + "/" + month + "/" + i) > parseDate(lastDate)) {
+                        if (parseDate(year + "/" + month + "/" + i) < parseDate(lastDay)
+                            && parseDate(year + "/" + month + "/" + i) > parseDate(firstDay)) {
                             triggers[i + firstDayOfWeek - 1].className = 'SafePeriod';
                         }
                     }
@@ -552,7 +615,7 @@
                 for (var i = 0; i < periodInfo_labeled.length; i++) {
                     if (parseDate(periodInfo_labeled[i].startDay).getMonth() + 1 === month
                         && parseDate(periodInfo_labeled[i].startDay).getFullYear() === year) {
-                        if (periodInfo_labeled[i].endDay === "1997-01-01") {
+                        if (periodInfo_labeled[i].endDay === "") {
                             for (var j = parseDate(periodInfo_labeled[i].startDay).getDate();
                                  j <= F.getDaysInMonth(year, month)
                                  && j <= new Date().getDate(); j++) {
@@ -662,8 +725,8 @@
                                 selectedEndOnOff.addEventListener('click', selectedEndOnOffClick);
 
                                 function selectedEndOnOffClick() {
-                                    if (lastPeriodDateStart === null) {
-                                        alert("没有开始经期的数据，请先设置开始时间，再设置结束时间");
+                                    if (lastDay === null) {
+                                        alert("请先设置开始时间，再设置结束时间");
                                         selectedEndOnOff.style.backgroundColor = '#CCC4C2';
                                         selectedEndOnOff.children[0].className = 'off';
                                         selectedEndOnOff.removeEventListener('click', selectedEndOnOffClick);
@@ -671,7 +734,7 @@
                                     }
                                     if (FormatDate(parseDate(year + "/" + month + "/" + arg)) === periodInfo_labeled[index].endDay) {
                                         if (FormatDate(parseDate(year + "/" + month + "/" + arg)) === FormatDate(new Date())) {
-                                            inPeriodData(getRecordId(parseDate(periodInfo_labeled[index].startDay)), unionId, 2, 1, '1997-01-01');
+                                            inPeriodData(getRecordId(parseDate(periodInfo_labeled[index].startDay)), unionId, 2, 1, '');
                                         } else {
                                             alert("如果不是这一天结束，请转到结束那天按此按钮");
                                             selectedEndOnOff.style.backgroundColor = '#FF4F73';
@@ -682,7 +745,7 @@
                                     } else if (getLastRecordId(parseDate(year + "/" + month + "/" + arg)) !== 0) {
                                         inPeriodData(getLastRecordId(parseDate(year + "/" + month + "/" + arg)), unionId, 2, 1, FormatDate(parseDate(year + "-" + month + "-" + arg)));
                                     } else {
-                                        alert("这一天之前两个月都没有开始经期的数据，请先设置开始时间，再设置结束时间");
+                                        alert("请先设置开始时间，再设置结束时间");
                                         selectedEndOnOff.style.backgroundColor = '#CCC4C2';
                                         selectedEndOnOff.children[0].className = 'off';
                                     }
@@ -693,10 +756,65 @@
                                     selectedEndOnOff.removeEventListener('click', selectedEndOnOffClick);
                                     this.parentNode.parentNode.parentNode.parentNode.style.display = 'none';
                                 }
-                                close_one.addEventListener('click', function () {
+                                cover_dysmenorrhea_data = 0;
+                                cover_flow_data = 0;
+                                getDealData(unionId,FormatDate(parseDate(year + "/" + month + "/" + arg)));
+                                for(var i = 0;i < cover_dysmenorrhea_data;i++){
+                                    cover_dysmenorrhea.children[2].children[i].children[0].style.color = '#FF4F73';
+                                }
+                                for(var i = cover_dysmenorrhea_data;i < 5;i++){
+                                    cover_dysmenorrhea.children[2].children[i].children[0].style.color = '#c0c0c0';
+                                }
+                                for(var i = 0;i < cover_flow_data;i++){
+                                    cover_flow.children[2].children[i].children[0].style.color = '#FF4F73';
+                                }
+                                for(var i = cover_flow_data;i < 5;i++){
+                                    cover_flow.children[2].children[i].children[0].style.color = '#c0c0c0';
+                                }
+                                cover_dysmenorrhea_data = 0;
+                                cover_flow_data = 0;
+                                for(var i = 0;i < 5;i++){
+                                    (function (num) {
+                                        cover_dysmenorrhea.children[2].children[num].onclick = function () {
+                                            for(var i = 0;i <= num;i++){
+                                                cover_dysmenorrhea.children[2].children[i].children[0].style.color = '#FF4F73';
+                                            }
+                                            for(var i = num + 1;i < 5;i++){
+                                                cover_dysmenorrhea.children[2].children[i].children[0].style.color = '#c0c0c0';
+                                            }
+                                            if(FormatDate(parseDate(year + "/" + month + "/" + arg))===FormatDate(new Date())){
+                                                dysmenorrhea_data = num +1 ;
+                                                inDealData(unionId,FormatDate(parseDate(year + "/" + month + "/" + arg)),1,num + 1);
+                                                return ;
+                                            }
+                                            inDealData(unionId,FormatDate(parseDate(year + "/" + month + "/" + arg)),1,num + 1);
+                                        }
+                                        cover_flow.children[2].children[num].onclick = function () {
+                                            for(var i = 0;i <= num;i++){
+                                                cover_flow.children[2].children[i].children[0].style.color = '#FF4F73';
+                                            }
+                                            for(var i = num + 1;i < 5;i++){
+                                                cover_flow.children[2].children[i].children[0].style.color = '#c0c0c0';
+                                            }
+                                            if(FormatDate(parseDate(year + "/" + month + "/" + arg))===FormatDate(new Date())){
+                                                flow_data = num +1 ;
+                                                inDealData(unionId,FormatDate(parseDate(year + "/" + month + "/" + arg)),2,num + 1);
+                                                return ;
+                                            }
+                                            inDealData(unionId,FormatDate(parseDate(year + "/" + month + "/" + arg)),2,num + 1);
+                                        }
+                                    })(i)
+                                }
+
+                                close_one.onclick = function () {
+                                    for(var i = 0;i < 5;i++) {
+                                        cover_dysmenorrhea.children[2].children[i].onclick = null;
+                                        cover_flow.children[2].children[i].onclick = null;
+                                    }
                                     selectedStartOnOff.removeEventListener('click', selectedStartOnOffClick);
                                     selectedEndOnOff.removeEventListener('click', selectedEndOnOffClick);
-                                })
+                                    list();
+                                }
                             })
                         })(i);
                     }
@@ -706,6 +824,8 @@
             //左滑 右划
             var x1, x2;
             triggerCover.addEventListener('touchstart', function (e) {
+                x1 = null;
+                x2 = null;
                 x1 = e.targetTouches[0].pageX;
                 triggerCover.addEventListener('touchmove', function (e) {
                     x2 = e.targetTouches[0].pageX;
@@ -744,7 +864,7 @@
                 render();
                 var firstDayOfWeek = F.getWeekInMonth(year, month);
                 var triggers = triggerCover.children;
-                triggers[day + firstDayOfWeek - 1].style.border = '2px solid #FF4F73'
+                triggers[day + firstDayOfWeek - 1].style.border = '2px solid #FF4F73';
                 list();
             }
 
@@ -815,25 +935,31 @@
                     toDayOnOff_li.style.display = 'block';
                     dysmenorrhea.style.display = 'block';
                     flow.style.display = 'block';
+                    var todayIcon = toDayOnOff_li.children[0];
                     var span1 = toDayOnOff_li.children[1];
                     var span2 = toDayOnOff_li.children[2];
                     if(periodInfo_labeled.length === 0){
+                        todayIcon.src = "../icon/start.png";
                         span1.innerText = ' يبدأ الحيض ?';
                         span2.style.backgroundColor = '#CCC4C2';
                         span2.children[0].className = 'off';
                     } else if (periodInfo_labeled[periodInfo_labeled.length - 1].endDay === FormatDate(new Date())) {
+                        todayIcon.src = "../icon/end.png";
                         span1.innerText = ' نهاية الحيض ?';
                         span2.style.backgroundColor = '#FF4F73';
                         span2.children[0].className = 'on';
-                    } else if (lastPeriodDateStart === null || new Date() > parseDate(periodInfo_labeled[periodInfo_labeled.length - 1].endDay) && periodInfo_labeled[periodInfo_labeled.length - 1].endDay !== '1997-01-01') {
+                    } else if (lastDay === null || new Date() > parseDate(periodInfo_labeled[periodInfo_labeled.length - 1].endDay) && periodInfo_labeled[periodInfo_labeled.length - 1].endDay !== '') {
+                        todayIcon.src = "../icon/start.png";
                         span1.innerText = ' يبدأ الحيض ?';
                         span2.style.backgroundColor = '#CCC4C2';
                         span2.children[0].className = 'off';
-                    } else if (lastPeriodDateStart === FormatDate(new Date())) {
+                    } else if (lastDay === FormatDate(new Date())) {
+                        todayIcon.src = "../icon/start.png";
                         span1.innerText = ' يبدأ الحيض ?';
                         span2.style.backgroundColor = '#FF4F73';
                         span2.children[0].className = 'on';
-                    } else if (periodInfo_labeled[periodInfo_labeled.length - 1].endDay === '1997-01-01' && parseDate(FormatDate(new Date())) > parseDate(lastPeriodDateStart)) {
+                    } else if (periodInfo_labeled[periodInfo_labeled.length - 1].endDay === '') {
+                        todayIcon.src = "../icon/end.png";
                         span1.innerText = ' نهاية الحيض ?';
                         span2.style.backgroundColor = '#CCC4C2';
                         span2.children[0].className = 'off';
@@ -842,28 +968,36 @@
                     for(var i = 0;i < dysmenorrhea_data;i++){
                         dysmenorrhea.children[2].children[i].children[0].style.color = '#FF4F73';
                     }
+                    for(var i = dysmenorrhea_data;i < 5;i++){
+                        dysmenorrhea.children[2].children[i].children[0].style.color = '#c0c0c0';
+                    }
                     for(var i = 0;i < flow_data;i++){
                         flow.children[2].children[i].children[0].style.color = '#FF4F73';
+                    }
+                    for(var i = flow_data;i < 5;i++){
+                        flow.children[2].children[i].children[0].style.color = '#c0c0c0';
                     }
                     for(var i = 0;i < 5;i++){
                         (function (sum) {
                             dysmenorrhea.children[2].children[sum].addEventListener('click',function () {
-                                for(var i = 0;i <= sum;i++){
+                                for(var i = 0;i < sum + 1;i++){
                                     dysmenorrhea.children[2].children[i].children[0].style.color = '#FF4F73';
                                 }
                                 for(var i = sum + 1;i < 5;i++){
                                     dysmenorrhea.children[2].children[i].children[0].style.color = '#c0c0c0';
                                 }
                                 inDealData(unionId,FormatDate(new Date()),1,sum + 1);
+                                dysmenorrhea_data = sum + 1;
                             });
                             flow.children[2].children[sum].addEventListener('click',function () {
-                                for(var i = 0;i <= sum;i++){
+                                for(var i = 0;i < sum + 1;i++){
                                     flow.children[2].children[i].children[0].style.color = '#FF4F73';
                                 }
                                 for(var i = sum + 1;i < 5;i++){
                                     flow.children[2].children[i].children[0].style.color = '#c0c0c0';
                                 }
                                 inDealData(unionId,FormatDate(new Date()),2,sum + 1);
+                                flow_data = sum + 1;
                             });
                         })(i)
                     }
@@ -873,13 +1007,13 @@
             toDayOnOff.addEventListener('click', toDayOnOffFunction);
 
             function toDayOnOffFunction() {
-                if (periodInfo_labeled.length === 0 || (new Date() > parseDate(periodInfo_labeled[periodInfo_labeled.length - 1].endDay) && periodInfo_labeled[periodInfo_labeled.length - 1].endDay !== '1997-01-01')) {
+                if (periodInfo_labeled.length === 0 || (new Date() > AddDays(parseDate(periodInfo_labeled[periodInfo_labeled.length - 1].endDay),1) && periodInfo_labeled[periodInfo_labeled.length - 1].endDay !== '')) {
                     inPeriodData(getRecordId(new Date()), unionId, 1, 1, FormatDate(new Date()));
                 } else if (periodInfo_labeled[periodInfo_labeled.length - 1].endDay === FormatDate(new Date())) {
                     inPeriodData(getRecordId(new Date()), unionId, 2, -1, '1997-01-01');
-                } else if (lastPeriodDateStart === FormatDate(new Date())) {
+                } else if (lastDay === FormatDate(new Date())) {
                     inPeriodData(getRecordId(new Date()), unionId, 1, -1, FormatDate(new Date()));
-                } else if (periodInfo_labeled[periodInfo_labeled.length - 1].endDay === '1997-01-01' && parseDate(FormatDate(new Date())) > parseDate(lastPeriodDateStart)) {
+                } else if (periodInfo_labeled[periodInfo_labeled.length - 1].endDay === '' && parseDate(FormatDate(new Date())) > parseDate(lastDay)) {
                     inPeriodData(getRecordId(new Date()), unionId, 2, 1, FormatDate(new Date()));
                 }
                 getPeriodData(unionId, FormatDate(new Date()));
@@ -894,7 +1028,11 @@
                     this.parentNode.parentNode.parentNode.style.display = 'none';
                 })
             }
-
+            for (var k = 0; k < icon_close.length; k++) {
+                icon_close[k].addEventListener('click', function () {
+                    this.parentNode.parentNode.parentNode.style.display = 'none';
+                })
+            }
             //遮挡层2
             //记录经期时长
             trigger_duration.addEventListener('click', function () {
@@ -911,9 +1049,10 @@
                         duration_data = i + 1;
                         yes_duration.addEventListener('click', yes_duration_click);
                         function yes_duration_click() {
-                            inPeriodDataRule(unionId, dataCycle, duration_data, lastDate);
+                            updataPeriodDataRule(unionId, dataCycle, duration_data);
                             yes_duration.removeEventListener('click', yes_duration_click);
                             this.parentNode.parentNode.parentNode.style.display = 'none';
+                            getPeriodData(unionId,year+'-'+month+'-01')
                             resValue();
                             render();
                             list();
@@ -940,9 +1079,10 @@
                         cycle_data = i + 1;
                         yes_cycle.addEventListener('click', yes_cycle_click);
                         function yes_cycle_click() {
-                            inPeriodDataRule(unionId, cycle_data, dataTime, lastDate);
+                            updataPeriodDataRule(unionId, cycle_data, dataTime +1 );
                             yes_cycle.removeEventListener('click', yes_cycle_click);
                             this.parentNode.parentNode.parentNode.style.display = 'none';
+                            getPeriodData(unionId,year+'-'+month+'-01')
                             resValue();
                             render();
                             list();
