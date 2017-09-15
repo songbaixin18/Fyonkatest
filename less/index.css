@@ -166,7 +166,6 @@ textarea {
 }
 .period_container .calendar .weeks {
   width: 100%;
-  height: 0.38rem;
   font-size: 0.24rem;
   background-color: #fff;
   margin: 0 auto;
@@ -534,7 +533,6 @@ textarea {
 }
 .period_container .init_calendar .calendarBox .weeks {
   width: 100%;
-  height: 0.38rem;
   font-size: 0.24rem;
   background-color: #fff;
   margin: 0 auto;
